@@ -1,9 +1,9 @@
 {
   "id": "YaphetS0903.app.sub",
-  "name": "YaphetS 脚本订阅",
+  "name": "jankinsu脚本订阅",
   "author": "YaphetS0903",
-  "icon": "https://raw.githubusercontent.com/YaphetS0903/JStest/main/image/YaphetS.png",
-  "repo": "https://github.com/YaphetS0903/JStest",
+  "icon": "https://github.com/Jankinsu/GET_THE_BEST_DEAL/blob/main/image/cute.jpg",
+  "repo": "https://github.com/Jankinsu/GET_THE_BEST_DEAL",
   "apps": [
   {
             "id": "hmd",
