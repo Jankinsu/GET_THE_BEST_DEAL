@@ -1,0 +1,12 @@
+{
+  "name":"叮咚买菜",
+  "description":"https://github.com/justplayscript/ddxp",
+  "task":[
+    "10 0 * * * https://raw.githubusercontent.com/justplayscript/ddxp/main/ddxp.js, tag=叮咚买菜签到, enabled=true",
+    "30 23 * * * https://raw.githubusercontent.com/justplayscript/ddxp/main/ddxpautoeval.js, tag=叮咚自动喂鱼浇水, enabled=true",
+    "1 0 * * * https://raw.githubusercontent.com/justplayscript/ddxp/main/ddxpsign.js, tag=叮咚每日签到积分, enabled=true",
+    "1 7,10,16 * * * https://raw.githubusercontent.com/justplayscript/ddxp/main/ddxptime.js, tag=叮咚买菜准点签到, enabled=true",
+    "55 23 * * * https://raw.githubusercontent.com/justplayscript/ddxp/main/ddxpxd.js, tag=叮咚下单后自动领取, enabled=true",
+    ]
+
+}
