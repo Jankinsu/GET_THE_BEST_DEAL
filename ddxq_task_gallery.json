@@ -2,11 +2,11 @@
   "name":"叮咚买菜",
   "description":"https://github.com/justplayscript/ddxp",
   "task":[
-    "10 0 * * * https://raw.githubusercontent.com/justplayscript/ddxp/main/ddxp.js, tag=叮咚买菜签到, ima-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/dingdong.png, enabled=true",
-    "30 23 * * * https://raw.githubusercontent.com/justplayscript/ddxp/main/ddxpautoeval.js, tag=叮咚自动喂鱼浇水, ima-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/dingdong.png, enabled=true",
-    "1 0 * * * https://raw.githubusercontent.com/justplayscript/ddxp/main/ddxpsign.js, tag=叮咚每日签到积分, ima-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/dingdong.png, enabled=true",
-    "1 7,10,16 * * * https://raw.githubusercontent.com/justplayscript/ddxp/main/ddxptime.js, tag=叮咚买菜准点签到, ima-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/dingdong.png, enabled=true",
-    "55 23 * * * https://raw.githubusercontent.com/justplayscript/ddxp/main/ddxpxd.js, tag=叮咚下单后自动领取, ima-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/dingdong.png, enabled=true",
+    "10 0 * * * https://raw.githubusercontent.com/justplayscript/ddxp/main/ddxp.js, tag=叮咚买菜签到, img-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/dingdong.png, enabled=true",
+    "30 23 * * * https://raw.githubusercontent.com/justplayscript/ddxp/main/ddxpautoeval.js, tag=叮咚自动喂鱼浇水, img-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/dingdong.png, enabled=true",
+    "1 0 * * * https://raw.githubusercontent.com/justplayscript/ddxp/main/ddxpsign.js, tag=叮咚每日签到积分, img-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/dingdong.png, enabled=true",
+    "1 7,10,16 * * * https://raw.githubusercontent.com/justplayscript/ddxp/main/ddxptime.js, tag=叮咚买菜准点签到, img-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/dingdong.png, enabled=true",
+    "55 23 * * * https://raw.githubusercontent.com/justplayscript/ddxp/main/ddxpxd.js, tag=叮咚下单后自动领取, img-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/dingdong.png, enabled=true",
     ]
 
 }
