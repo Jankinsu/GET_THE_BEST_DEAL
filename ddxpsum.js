@@ -98,10 +98,10 @@ function ddxpsumck() {
         if (ddxpsumurl) $.setdata(ddxpsumurl, `ddxpsumurl${status}`)
         $.log(ddxpsumurl)
 
-        const ddxpsumhd = $request.headers.cookie
+        const ddxpsumhd = $request.headers.Cookie
         if (ddxpsumhd) $.setdata(ddxpsumhd, `ddxpsumhd${status}`)
         $.log(ddxpsumhd)
-	$.log($request.headers)
+	/// $.log($request.headers)
 
         $.msg($.name, "", `叮咚鱼塘整合${status}获取headers成功`)
 
