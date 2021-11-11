@@ -101,6 +101,7 @@ function ddxpsumck() {
         const ddxpsumhd = $request.headers.cookie
         if (ddxpsumhd) $.setdata(ddxpsumhd, `ddxpsumhd${status}`)
         $.log(ddxpsumhd)
+	$.log($request.headers)
 
         $.msg($.name, "", `叮咚鱼塘整合${status}获取headers成功`)
 
