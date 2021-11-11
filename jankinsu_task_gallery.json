@@ -1,0 +1,8 @@
+{
+  "name":"叮咚买菜",
+  "description":"https://github.com/Jankinsu/GET_THE_BEST_DEAL",
+  "task":[
+    "13 7,11,17 * * * https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/ddxpsum.js, tag=叮咚买菜签到, img-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/dingdong.png, enabled=true",
+    ]
+
+}
