@@ -171,7 +171,7 @@ function rcqd(timeout = 0) {
 
                 if (data.code == 0) {
 					console.log(`鱼塘日常签到成功`)
-					console.log(`获得${data.data.rewards.amount}`)
+					console.log(`获得${data.data.rewards[0].amount}`)
 
                 } else {
 					console.log(`鱼塘日常签到失败,${data.msg}`)
@@ -207,7 +207,7 @@ function lxqd(timeout = 0) {
 
                 if (data.code == 0) {
 					console.log(`鱼塘连续签到成功`)
-					console.log(`获得${data.data.rewards.amount}`)
+					console.log(`获得${data.data.rewards[0].amount}`)
 
                 } else {
 					console.log(`鱼塘连续签到失败,${data.msg}`)
@@ -241,7 +241,7 @@ function fdqd(timeout = 0) {
 
                 if (data.code == 0) {
 					console.log(`鱼塘饭点签到成功`)
-					console.log(`获得${data.data.rewards.amount}`)
+					console.log(`获得${data.data.rewards[0].amount}`)
 
                 } else {
 					console.log(`鱼塘饭点签到失败,${data.msg}`)
@@ -313,7 +313,7 @@ function shjl(timeout = 0) {
 
                 if (data.code == 0) {
 					console.log(`连续签到成功`)
-					console.log(`获得${data.data.rewards.amount}`)
+					console.log(`获得${data.data.rewards[0].amount}`)
 
                 } else {
 					console.log(`连续签到失败,${data.msg}`)
@@ -353,7 +353,7 @@ function rcqd2(timeout = 0) {
 
                 if (data.code == 0) {
 					console.log(`果园签到成功`)
-					console.log(`获得${data.rewards.amount}`)
+					console.log(`获得${data.data.rewards[0].amount}`)
 
                 } else {
 					console.log(`果园签到失败,${data.msg}`)
@@ -390,7 +390,7 @@ function lxqd2(timeout = 0) {
 
                 if (data.code == 0) {
 					console.log(`果园连续签到成功`)
-					console.log(`获得${data.rewards.amount}`)
+					console.log(`获得${data.data.rewards[0].amount}`)
 
                 } else {
 					console.log(`果园连续签到失败,${data.msg}`)
@@ -426,7 +426,7 @@ function fdqd2(timeout = 0) {
 
                 if (data.code == 0) {
 					console.log(`果园饭点签到成功`)
-					console.log(`获得${data.rewards.amount}`)
+					console.log(`获得${data.data.rewards[0].amount}`)
 
                 } else {
 					console.log(`果园饭点签到失败,${data.msg}`)
@@ -462,7 +462,7 @@ function llsp2(timeout = 0) {
                 if (data.code == 0) {
 					console.log(`鱼塘浏览商品成功`);
 					console.log(`获得${data.data.userTaskLogId}`);
-					userTaskLogId1 = data.data.userTaskLogId;
+					userTaskLogId2 = data.data.userTaskLogId;
 
                 } else {
 					console.log(`鱼塘浏览商品失败,${data.msg}`)
@@ -499,7 +499,7 @@ function shjl2(timeout = 0) {
 
                 if (data.code == 0) {
 					console.log(`果园收获奖励成功`)
-					console.log(`获得${data.data.rewards.amount}`)
+					console.log(`获得${data.data.rewards[0].amount}`)
 
                 } else {
 					console.log(`果园收获奖励失败,${data.msg}`)
