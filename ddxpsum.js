@@ -53,8 +53,8 @@ let ddxpsumhd = $.getdata('ddxpsumhd')
 
                 $.index = i + 1;
                 console.log(`\n\n开始【叮咚鱼塘整合${$.index}】`)
-				setp();
-				await rcqd(ddxpsumurl)
+				setp(ddxpsumurl);
+				await rcqd()
 				// 随机休息1-3秒
 				await $.wait(1000*(1+ Math.round(2*Math.random())))
 				await lxqd()
