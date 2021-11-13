@@ -78,7 +78,7 @@ let propsId2 = "";
 				
 				setp(ddwyurl);//设置若干参数
 				await fwmm();
-				await $.wait(10000);
+				await $.wait(1000);
 
                 //循环运行
                 for (let c = 0; c < 10; c++) {
