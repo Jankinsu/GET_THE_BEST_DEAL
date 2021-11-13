@@ -202,7 +202,7 @@ function ytwy(timeout = 0) {
 		
 
         let url = {
-            url: `https://farm.api.ddxq.mobi/api/v2/userguide/detail?api_version=9.1.0&app_client_id=1&native_version=&app_version=9.39.0&latitude=${latitude}&longitude=${longitude}&gameId=1&cityCode=0101&feedPro=0&propsId=${propsId}&seedId=${seedId}&triggerMultiFeed=1`,
+            url: `https://farm.api.ddxq.mobi/api/v2/props/feed?api_version=9.1.0&app_client_id=1&station_id=5a4f5adb846c2e437e8dce28&native_version=&app_version=9.39.0&latitude=${latitude}&longitude=${longitude}&gameId=1&propsId=${propsId}&seedId=${seedId}&cityCode=0101&feedPro=0&triggerMultiFeed=1`,
             headers: headers,
         }
 
