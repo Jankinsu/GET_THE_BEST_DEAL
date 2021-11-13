@@ -1,4 +1,9 @@
+/*
 
+17 8 * * * https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/ddxpsum.js, tag=自动喂鱼, img-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/dingdong.png, enabled=true 
+
+
+*/
 
 // 时间：2021/11/11
 
@@ -101,7 +106,7 @@ function ddxpsumck() {
         const ddxpsumhd = $request.headers.Cookie
         if (ddxpsumhd) $.setdata(ddxpsumhd, `ddxpsumhd${status}`)
         $.log(ddxpsumhd)
-	/// $.log($request.headers)
+	    $.log(`让我看看status是啥status:${status}`)		
 
         $.msg($.name, "", `叮咚鱼塘整合${status}获取headers成功`)
 

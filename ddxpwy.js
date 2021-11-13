@@ -2,7 +2,8 @@
 自动喂鱼
 
 返回饲料数目
-
+[task local]
+17 21 * * * https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/ddxpwy.js, tag=自动喂鱼, img-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/dingdong.png, enabled=true 
 
 */
 
@@ -18,6 +19,8 @@ status = (status = ($.getval("ddwystatus") || "1")) > 1 ? `${status}` : "";
 
 const ddwyurlArr = [], ddwyhdArr = [], ddwycount = ''
 
+
+// 使用ddxpsum 的url和hd
 let ddwyurl = $.getdata('ddxpsumurl')
 let ddwyhd = $.getdata('ddxpsumhd')
 
@@ -61,17 +64,20 @@ let ddwyhd = $.getdata('ddxpsumhd')
 
                 $.index = i + 1;
                 console.log(`\n\n开始【教程${$.index}】`)
+				
+				setp(ddwyurl);//设置若干参数
+				baseSeed =  await fwmm();
+				await $.wait(1000);
+				seedId = baseSeed.seedId;
+				propsId = baseSeed.propsId;
 
                 //循环运行
-                for (let c = 0; c < 200; c++) {
+                for (let c = 0; c < 10; c++) {
                     $.index = c + 1
-
-
-                    await bankuai()//你要执行的版块  
+                    remain = await ytwy()//你要执行的版块  
                     await $.wait(1000)//你要延迟的时间  1000=1秒
-
-
-
+					// 鱼料较少停止喂鱼
+					if(remain<20){break;}
 
                 }
             }
@@ -81,6 +87,17 @@ let ddwyhd = $.getdata('ddxpsumhd')
 
     .catch((e) => $.logErr(e))
     .finally(() => $.done())
+
+let remain;
+uid = "";
+latitude = "";
+longitude = "";
+station_id = "";
+baseSeed = {};
+seedId = "";
+propsId = "";
+seedId2 = "";
+propsId2 = "";
 
 
 // 生成公共header
@@ -128,7 +145,7 @@ function setp(ddwyurl){
 
 //此脚本使用ddxpsum.js 的url和hd
 function ddwyck() {
-    if ($request.url.indexOf("弃用") > -1) {
+    if ($request.url.indexOf("此脚本无需获取ck") > -1) {
         const ddwyurl = $request.url
         if (ddwyurl) $.setdata(ddwyurl, `ddwyurl${status}`)
         $.log(ddwyurl)
@@ -142,16 +159,14 @@ function ddwyck() {
     }
 }
 
-
-
-
-//鱼塘喂鱼
-function ytwy(timeout = 0) {
+// 访问门面(userguide) ,获取鱼塘seedId
+function fwmm(timeout = 0) {
     return new Promise((resolve) => {
-
+		let headers = pubheader()
+		let baseSeed = {};
         let url = {
-            url: ``,
-            headers: JSON.parse(ddwyhd),
+            url: `https://farm.api.ddxq.mobi/api/v2/userguide/detail?api_version=9.1.0&app_client_id=1&native_version=&app_version=9.39.0&latitude=${latitude}&longitude=${longitude}&gameId=1&guideCode=FISHPOND_NEW`,
+            headers: headers,
         }
 
         $.get(url, async (err, resp, data) => {
@@ -160,9 +175,14 @@ function ytwy(timeout = 0) {
                 data = JSON.parse(data)
 
                 if (data.status == 0) {
+					baseSeed["seedId"] = data["data"]["baseSeed"]["seedId"];
+					baseSeed["propsId"] = data["data"]["feed"]["propsId"];
+					console.log(`访问门面成功，seedId:${baseSeed["seedId"]}   propsId:${baseSeed["propsId"]}`);
+					return baseSeed;
 
 
                 } else {
+					console.log("访问门面失败，${data.msg}");
 
 
                 }
@@ -175,6 +195,48 @@ function ytwy(timeout = 0) {
         }, timeout)
     })
 }
+
+
+
+//鱼塘喂鱼
+function ytwy(timeout = 0) {
+    return new Promise((resolve) => {
+		let remain;
+		let headers = pubheader();
+		
+
+        let url = {
+            url: `https://farm.api.ddxq.mobi/api/v2/userguide/detail?api_version=9.1.0&app_client_id=1&native_version=&app_version=9.39.0&latitude=${latitude}&longitude=${longitude}&gameId=1&cityCode=0101&feedPro=0&propsId=${propsId}&seedId=${seedId}&triggerMultiFeed=1`,
+            headers: headers,
+        }
+
+        $.get(url, async (err, resp, data) => {
+            try {
+
+                data = JSON.parse(data)
+
+                if (data.status == 0) {
+					remain = data.data.props.amount;
+					console.log(`喂鱼一次成功，剩余数目：${remain},${data.data.msg}`);
+					return remain;
+					
+
+
+                } else {
+					console.log(`喂鱼失败，${data.msg}`)
+
+
+                }
+            } catch (e) {
+
+            } finally {
+
+                resolve()
+            }
+        }, timeout)
+    })
+}
+
 
 // 果园浇水
 function gyjs(timeout = 0) {
