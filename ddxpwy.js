@@ -80,13 +80,14 @@ let propsId2 = "";
         await $.wait(1000);
         await fwmm2();
         await $.wait(1000);
-
+/*
         //循环运行
         for (let c = 0; c < 10; c++) {
           $.index = c + 1
           await ytwy() //你要执行的版块
           await $.wait(3000) //你要延迟的时间  1000=1秒
         }
+*/
         for (let c = 0; c < 5; c++) {
           $.index = c + 1
           await gyjs() //你要执行的版块
@@ -262,12 +263,14 @@ function fwmm2(timeout = 0) {
         data = JSON.parse(data)
 
         if (data.code == 0) {
-          console(`果园门面访问成功，${data.data.baseSeed.msg}`);
+          console.log(`果园门面访问成功，${data.data.baseSeed.msg}`);
           seedId2 = data.data.baseSeed.seedId;
           propsId2 = data.data.feed.propsId;
 
 
         } else {
+          console.log(`果园门面访问失败，${data.msg}`);
+
 
 
         }
@@ -302,12 +305,12 @@ function gyjs(timeout = 0) {
         data = JSON.parse(data)
 
         if (data.code == 0) {
-          console(`果园浇水一次成功，${data.data.msg}`);
-          console(`还有水量：${data.data.feed.amount}`)
+          console.log(`果园浇水一次成功，${data.data.msg}`);
+          console.log(`还有水量：${data.data.feed.amount}`)
 
 
         } else {
-          console(`果园胶水失败，${data.msg}`)
+          console.log(`果园胶水失败，${data.msg}`)
 
 
         }
