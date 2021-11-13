@@ -175,7 +175,7 @@ function fwmm(timeout = 0) {
 
                 data = JSON.parse(data)
 
-                if (data.status == 0) {
+                if (data.code == 0) {
 					baseSeed["seedId"] = data["data"]["baseSeed"]["seedId"];
 					baseSeed["propsId"] = data["data"]["feed"]["propsId"];
 					console.log(`访问门面成功，seedId:${baseSeed["seedId"]}   propsId:${baseSeed["propsId"]}`);
@@ -216,7 +216,7 @@ function ytwy(timeout = 0) {
 
                 data = JSON.parse(data)
 
-                if (data.status == 0) {
+                if (data.code == 0) {
 					remain = data.data.props.amount;
 					console.log(`喂鱼一次成功，剩余数目：${remain},${data.data.msg}`);
 					return remain;
@@ -253,7 +253,7 @@ function gyjs(timeout = 0) {
 
                 data = JSON.parse(data)
 
-                if (data.status == 0) {
+                if (data.code == 0) {
 
 
                 } else {
