@@ -22,8 +22,19 @@ const ddwyurlArr = [], ddwyhdArr = [], ddwycount = ''
 
 // 使用ddxpsum 的url和hd
 let ddwyurl = $.getdata('ddxpsumurl')
+$.log(ddwyurl)
 let ddwyhd = $.getdata('ddxpsumhd')
 
+let remain;
+let uid = "";
+let latitude = "";
+let longitude = "";
+let station_id = "";
+let baseSeed = {};
+let seedId = "";
+let propsId = "";
+let seedId2 = "";
+let propsId2 = "";
 
 
 
@@ -88,16 +99,6 @@ let ddwyhd = $.getdata('ddxpsumhd')
     .catch((e) => $.logErr(e))
     .finally(() => $.done())
 
-let remain;
-uid = "";
-latitude = "";
-longitude = "";
-station_id = "";
-baseSeed = {};
-seedId = "";
-propsId = "";
-seedId2 = "";
-propsId2 = "";
 
 
 // 生成公共header
@@ -118,7 +119,7 @@ function pubheader(){
 
 // 设置若干参数
 function setp(ddwyurl){
-	let s = ddxpsumurl.split('?');
+	let s = ddwyurl.split('?');
 	let ss = s[s.length-1].split('&');
 	let info = {};
 	for(let val of ss){
@@ -182,7 +183,7 @@ function fwmm(timeout = 0) {
 
 
                 } else {
-					console.log("访问门面失败，${data.msg}");
+					console.log(`访问门面失败，${data.msg}`);
 
 
                 }
