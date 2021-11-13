@@ -10,7 +10,7 @@
 
 
 //只需要把 ddwy 批量替换成你想取的名字
-// 把  教程  改成软件名  
+// 把  喂鱼  改成软件名  
 
 const $ = new Env('叮咚喂鱼');
 let status;
@@ -74,11 +74,11 @@ let propsId2 = "";
 
 
                 $.index = i + 1;
-                console.log(`\n\n开始【教程${$.index}】`)
+                console.log(`\n\n开始【叮咚喂鱼${$.index}】`)
 				
 				setp(ddwyurl);//设置若干参数
 				baseSeed =  await fwmm();
-				await $.wait(1000);
+				await $.wait(10000);
 				seedId = baseSeed.seedId;
 				propsId = baseSeed.propsId;
 
