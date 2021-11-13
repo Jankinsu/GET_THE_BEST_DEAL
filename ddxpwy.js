@@ -30,7 +30,7 @@ let uid = "";
 let latitude = "";
 let longitude = "";
 let station_id = "";
-let baseSeed = {};
+// let baseSeed = {};
 let seedId = "";
 let propsId = "";
 let seedId2 = "";
@@ -77,18 +77,14 @@ let propsId2 = "";
                 console.log(`\n\n开始【叮咚喂鱼${$.index}】`)
 				
 				setp(ddwyurl);//设置若干参数
-				baseSeed =  await fwmm();
+				await fwmm();
 				await $.wait(10000);
-				seedId = baseSeed.seedId;
-				propsId = baseSeed.propsId;
 
                 //循环运行
                 for (let c = 0; c < 10; c++) {
                     $.index = c + 1
-                    remain = await ytwy()//你要执行的版块  
-                    await $.wait(1000)//你要延迟的时间  1000=1秒
-					// 鱼料较少停止喂鱼
-					if(remain<20){break;}
+                    await ytwy()//你要执行的版块  
+                    await $.wait(3000)//你要延迟的时间  1000=1秒
 
                 }
             }
@@ -176,10 +172,9 @@ function fwmm(timeout = 0) {
                 data = JSON.parse(data)
 
                 if (data.code == 0) {
-					baseSeed["seedId"] = data["data"]["baseSeed"]["seedId"];
-					baseSeed["propsId"] = data["data"]["feed"]["propsId"];
+					seedId = data["data"]["baseSeed"]["seedId"];
+					propsId = data["data"]["feed"]["propsId"];
 					console.log(`访问门面成功，seedId:${baseSeed["seedId"]}   propsId:${baseSeed["propsId"]}`);
-					return baseSeed;
 
 
                 } else {
