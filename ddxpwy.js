@@ -89,7 +89,7 @@ let propsId2 = "";
         }
         for (let c = 0; c < 5; c++) {
           $.index = c + 1
-          await () //你要执行的版块
+          await gyjs() //你要执行的版块
           await $.wait(3000) //你要延迟的时间  1000=1秒
         }
 
