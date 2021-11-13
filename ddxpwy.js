@@ -174,7 +174,7 @@ function fwmm(timeout = 0) {
                 if (data.code == 0) {
 					seedId = data["data"]["baseSeed"]["seedId"];
 					propsId = data["data"]["feed"]["propsId"];
-					console.log(`访问门面成功，seedId:${baseSeed["seedId"]}   propsId:${baseSeed["propsId"]}`);
+					console.log(`访问门面成功，seedId:${seedId}   propsId:${propsId}`);
 
 
                 } else {
@@ -214,7 +214,6 @@ function ytwy(timeout = 0) {
                 if (data.code == 0) {
 					remain = data.data.props.amount;
 					console.log(`喂鱼一次成功，剩余数目：${remain},${data.data.msg}`);
-					return remain;
 					
 
 
