@@ -30,7 +30,7 @@ let latitude = "";
 let longitude = "";
 let station_id = "";
 let userTaskLogId1 = "";
-let userTaskLogId1 = "";
+let userTaskLogId2 = "";
 let userTaskLogId_receive = "";
 let userTaskLogId_luckyDraw = "";
 let uuid_gy;
