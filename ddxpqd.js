@@ -17,7 +17,7 @@ status = (status = ($.getval("ddxpsumstatus") || "1")) > 1 ? `${status}` : "";
 
 const ddxpsumurlArr = [],
   ddxpsumhdArr = [],
-//  ddxpsumbodyArr = [],
+  //  ddxpsumbodyArr = [],
   ddxpsumcount = ''
 
 let ddxpsumurl = $.getdata('ddxpsumurl')
@@ -36,81 +36,81 @@ let userTaskLogId_luckyDraw = "";
 let uuid_gy;
 let uuid_yt;
 
-  !(async () => {
-    if (typeof $request !== "undefined") {
+!(async () => {
+  if (typeof $request !== "undefined") {
 
-      ddxpsumck()
+    ddxpsumck()
 
-    } else {
-      ddxpsumurlArr.push($.getdata('ddxpsumurl'))
-      ddxpsumhdArr.push($.getdata('ddxpsumhd'))
-//      ddxpsumbodyArr.push($.getdata('ddxpsumbody'))
+  } else {
+    ddxpsumurlArr.push($.getdata('ddxpsumurl'))
+    ddxpsumhdArr.push($.getdata('ddxpsumhd'))
+    //      ddxpsumbodyArr.push($.getdata('ddxpsumbody'))
 
-      let ddxpsumcount = ($.getval('ddxpsumcount') || '1');
+    let ddxpsumcount = ($.getval('ddxpsumcount') || '1');
 
-      for (let i = 2; i <= ddxpsumcount; i++) {
+    for (let i = 2; i <= ddxpsumcount; i++) {
 
-        ddxpsumurlArr.push($.getdata(`ddxpsumurl${i}`))
-        ddxpsumhdArr.push($.getdata(`ddxpsumhd${i}`))
-//        ddxpsumbodyArr.push($.getdata(`ddxpsumbody${i}`))
+      ddxpsumurlArr.push($.getdata(`ddxpsumurl${i}`))
+      ddxpsumhdArr.push($.getdata(`ddxpsumhd${i}`))
+      //        ddxpsumbodyArr.push($.getdata(`ddxpsumbody${i}`))
 
-      }
+    }
 
-      console.log(
-        `\n\n=============================================== 脚本执行 - 北京时间(UTC+8)：${new Date(
+    console.log(
+      `\n\n=============================================== 脚本执行 - 北京时间(UTC+8)：${new Date(
                 new Date().getTime() +
                 new Date().getTimezoneOffset() * 60 * 1000 +
                 8 * 60 * 60 * 1000
             ).toLocaleString()} ===============================================\n`);
 
-      for (let i = 0; i < ddxpsumhdArr.length; i++) {
+    for (let i = 0; i < ddxpsumhdArr.length; i++) {
 
-        if (ddxpsumhdArr[i]) {
+      if (ddxpsumhdArr[i]) {
 
-          ddxpsumurl = ddxpsumurlArr[i];
-          ddxpsumhd = ddxpsumhdArr[i];
-//          ddxpsumbody = ddxpsumbodyArr[i];
+        ddxpsumurl = ddxpsumurlArr[i];
+        ddxpsumhd = ddxpsumhdArr[i];
+        //          ddxpsumbody = ddxpsumbodyArr[i];
 
-          $.index = i + 1;
-          console.log(`\n\n开始【签到领积分${$.index}】`)
-
-
-          //循环运行
-          for (let c = 0; c < 1; c++) {
-            $.index = c + 1
-            //设置参数
-            setp(ddxpsumurl);
-            await $.wait(1000);
-            // 签到领积分
-            await ddxpqd();
-            await $.wait(1000*(1+ Math.round(2*Math.random()))) ;
-            // 获取task receive 和 lucky draw id
-            await TaskId();
-            await $.wait(1000*(1+ Math.round(2*Math.random())));
-            // 翻牌
-            await ddxpfp();
-            await $.wait(1000*(1+ Math.round(2*Math.random())));
-            // 领取下单任务
-            await ddxplqxd();
-            await $.wait(1000*(1+ Math.round(2*Math.random())));
-            // 翻牌领赏
-            await ddxpfpls();
-            await $.wait(1000*(1+ Math.round(2*Math.random())));
-            // 鱼塘浏览
-            await llsp();
-            await $.wait(1000*(1+ Math.round(2*Math.random())));
-            await $.wait(30000);
-            // 收获鱼塘浏览奖励
-            await shjl();
+        $.index = i + 1;
+        console.log(`\n\n开始【签到领积分${$.index}】`)
 
 
-          }
+        //循环运行
+        for (let c = 0; c < 1; c++) {
+          $.index = c + 1
+          //设置参数
+          setp(ddxpsumurl);
+          await $.wait(1000);
+          // 签到领积分
+          await ddxpqd();
+          await $.wait(1000 * (1 + Math.round(2 * Math.random())));
+          // 获取task receive 和 lucky draw id
+          await TaskId();
+          await $.wait(1000 * (1 + Math.round(2 * Math.random())));
+          // 翻牌
+          await ddxpfp();
+          await $.wait(1000 * (1 + Math.round(2 * Math.random())));
+          // 领取下单任务
+          await ddxplqxd();
+          await $.wait(1000 * (1 + Math.round(2 * Math.random())));
+          // 翻牌领赏
+          await ddxpfpls();
+          await $.wait(1000 * (1 + Math.round(2 * Math.random())));
+          // 鱼塘浏览
+          await llsp();
+          await $.wait(1000 * (1 + Math.round(2 * Math.random())));
+          await $.wait(30000);
+          // 收获鱼塘浏览奖励
+          await shjl();
+
+
         }
       }
     }
-  })()
+  }
+})()
 
-  .catch((e) => $.logErr(e))
+.catch((e) => $.logErr(e))
   .finally(() => $.done())
 
 
@@ -136,34 +136,36 @@ function ddxpsumck() {
 
 
 // 生成公共header
-function pubheader(){
+function pubheader() {
 
-	return {"Accept": "*/*",
-	"Accept-Encoding": "gzip, deflate, br",
-	"Accept-Language": "en-us",
-	"Connection": "keep-alive",
-	"Cookie": ddxpsumhd,
-	"Host": "farm.api.ddxq.mobi",
-	"Origin": "https://game.m.ddxq.mobi",
-	"Referer": "https://game.m.ddxq.mobi/index.html",
-	"User-Agent": `Mozilla/5.0 (iPad; CPU OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 xzone/9.36.2 station_id/${station_id}`}
+  return {
+    "Accept": "*/*",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Accept-Language": "en-us",
+    "Connection": "keep-alive",
+    "Cookie": ddxpsumhd,
+    "Host": "farm.api.ddxq.mobi",
+    "Origin": "https://game.m.ddxq.mobi",
+    "Referer": "https://game.m.ddxq.mobi/index.html",
+    "User-Agent": `Mozilla/5.0 (iPad; CPU OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 xzone/9.36.2 station_id/${station_id}`
+  }
 }
 
 
 // 设置若干参数
-function setp(ddxpsumurl){
-	let s = ddxpsumurl.split('?');
-	let ss = s[s.length-1].split('&');
-	let info = {};
-	for(let val of ss){
-		k = val.split('=')[0];
-		v = val.split('=')[1];
-		info[k] = v;
-	}
-	uid = info['uid'];
-	latitude = info['latitude'];
-	longitude = info['longitude'];
-	station_id = info['station_id'];
+function setp(ddxpsumurl) {
+  let s = ddxpsumurl.split('?');
+  let ss = s[s.length - 1].split('&');
+  let info = {};
+  for (let val of ss) {
+    k = val.split('=')[0];
+    v = val.split('=')[1];
+    info[k] = v;
+  }
+  uid = info['uid'];
+  latitude = info['latitude'];
+  longitude = info['longitude'];
+  station_id = info['station_id'];
 
 }
 
@@ -183,15 +185,15 @@ function ddxpqd(timeout = 0) {
     let url = {
       url: `https://sunquan.api.ddxq.mobi/api/v2/user/signin/`,
       headers: headers,
-      body:{
-                api_version: "9.7.3",
-                app_version: "1.0.0",
-                app_client_id: 3,
-                native_version: "9.39.0",
-                city_number: 0101,
-                latitude: latitude,
-                longitude: longitude,
-            },
+      body: {
+        api_version: "9.7.3",
+        app_version: "1.0.0",
+        app_client_id: 3,
+        native_version: "9.39.0",
+        city_number: 0101,
+        latitude: latitude,
+        longitude: longitude,
+      },
     }
     $.post(url, async (err, resp, data) => {
       try {
@@ -199,6 +201,7 @@ function ddxpqd(timeout = 0) {
         data = JSON.parse(data)
 
         if (data.success) {
+          console.log(`\n`);
           console.log(`签到成功，获得积分数目：${data.data.point}`);
           console.log(`获得ticket_money : ${data.data.ticket_money}`);
 
@@ -223,7 +226,7 @@ function ddxpqd(timeout = 0) {
 // 访问task list
 function TaskId(timeout = 0) {
   return new Promise((resolve) => {
-    let link,paras;
+    let link, paras;
     let headers = pubheader()
     let url = {
       url: `https://farm.api.ddxq.mobi/api/v2/task/list?api_version=9.1.0&app_client_id=1&native_version=&app_version=9.39.0&latitude=${latitude}&longitude=${longitude}&gameId=1&cityCode=0101`,
@@ -236,13 +239,18 @@ function TaskId(timeout = 0) {
         data = JSON.parse(data)
 
         if (data.code == 0) {
-          userTaskLogId_luckyDraw = data.data.userTasks[8].taskCode;
+          userTaskLogId_luckyDraw = data.data.userTasks[8].userTaskLogId;
           userTaskLogId_receive = data.data.userTasks[0].userTaskLogId;
           link = data.data.userTasks[1].cmsLink;
-          paras = link.search.slice(1,-1).split("&")
-          for(para of paras){
-            if (para.split("=")[0] == "uuid"){uuid_yt = para.split("=")[1];break};
+          obj = new URL(link);
+          paras = obj.search.slice(1, -1).split("&");
+          for (let para of paras) {
+            if (para.split("=")[0] == "uuid") {
+              uuid_yt = para.split("=")[1];
+            }
+
           }
+          console.log(`\n`);
           console.log(`访问taskid成功，获得receive_task_id:${userTaskLogId_receive}   luckyDrawId:${userTaskLogId_luckyDraw}`);
           console.log(`browse_user_id uuid获取成功:${uuid_yt}`);
 
@@ -274,15 +282,15 @@ function ddxpfp(timeout = 0) {
     let url = {
       url: `https://farm.api.ddxq.mobi/api/v2/lucky-draw-activity/draw?api_version=9.7.3&app_version=1.0.0&app_client_id=3&native_version=9.39.0&city_number=0101&latitude=${latitude}&longitude=${longitude}&gameId=1`,
       headers: headers,
-      body:{
-                api_version: "9.7.3",
-                app_version: "1.0.0",
-                app_client_id: 3,
-                native_version: "9.39.0",
-                city_number: 0101,
-                latitude: latitude,
-                longitude: longitude,
-            },
+      body: {
+        api_version: "9.7.3",
+        app_version: "1.0.0",
+        app_client_id: 3,
+        native_version: "9.39.0",
+        city_number: 0101,
+        latitude: latitude,
+        longitude: longitude,
+      },
     }
     $.get(url, async (err, resp, data) => {
       try {
@@ -290,7 +298,8 @@ function ddxpfp(timeout = 0) {
         data = JSON.parse(data)
 
         if (data.success) {
-          console.log(`${data.msg}, ${data.data.msg}, ${data.data.chosen.rewardText}`);
+          console.log(`\n`);
+          console.log(`翻牌${data.msg}, ${data.data.msg}, ${data.data.chosen.rewardText}`);
 
 
         } else {
@@ -323,6 +332,7 @@ function ddxpfpls(timeout = 0) {
         data = JSON.parse(data)
 
         if (data.code == 0) {
+          console.log(`\n`);
           console.log(`翻牌领赏成功，领赏数目:${data.data.rewards[0].amount}`);
 
 
@@ -357,6 +367,7 @@ function ddxplqxd(timeout = 0) {
         data = JSON.parse(data)
 
         if (data.code == 0) {
+          console.log(`\n`);
           console.log(`领取下单任务成功，userTaskLogId:${data.data.userTaskLogId}`);
 
 
@@ -378,72 +389,74 @@ function ddxplqxd(timeout = 0) {
 // 功能 5
 // 鱼塘浏览商品
 function llsp(timeout = 0) {
-    return new Promise((resolve) => {
-		let headers = pubheader()
-		headers["Referer"] = `https://cms.api.ddxq.mobi/cms-service/client/page/v1/getPageInfo?uuid=${uuid_yt}&themeColor=72b1ff&hideShare=true&gameType=Farm&gameTask=BROWSE_GOODS&s=mine_farm_new&native_city_number=0101`;
-		headers["Origin"] = "https://cms.api.ddxq.mobi";
-		headers["DDMC-GAME-TID"]="1";
-        let url = {
-            url: `https://farm.api.ddxq.mobi/api/v2/task/achieve?api_version=9.28.0&app_client_id=3&native_version=9.39&city_number=0101&page_type=2&env=PE&latitude=${latitude}&longitude=${longitude}&gameId=1&taskCode=BROWSE_GOODS`,
-            headers: headers,
+  return new Promise((resolve) => {
+    let headers = pubheader()
+    headers["Referer"] = `https://cms.api.ddxq.mobi/cms-service/client/page/v1/getPageInfo?uuid=${uuid_yt}&themeColor=72b1ff&hideShare=true&gameType=Farm&gameTask=BROWSE_GOODS&s=mine_farm_new&native_city_number=0101`;
+    headers["Origin"] = "https://cms.api.ddxq.mobi";
+    headers["DDMC-GAME-TID"] = "1";
+    let url = {
+      url: `https://farm.api.ddxq.mobi/api/v2/task/achieve?api_version=9.28.0&app_client_id=3&native_version=9.39&city_number=0101&page_type=2&env=PE&latitude=${latitude}&longitude=${longitude}&gameId=1&taskCode=BROWSE_GOODS`,
+      headers: headers,
+    }
+
+    $.get(url, async (err, resp, data) => {
+      try {
+
+        data = JSON.parse(data)
+
+        if (data.code == 0) {
+          console.log(`\n`);
+          console.log(`鱼塘浏览商品成功`);
+          console.log(`获得${data.data.userTaskLogId}`);
+          userTaskLogId1 = data.data.userTaskLogId;
+
+        } else {
+          console.log(`鱼塘浏览商品失败,${data.msg}`)
+
         }
+      } catch (e) {
 
-        $.get(url, async (err, resp, data) => {
-            try {
+      } finally {
 
-                data = JSON.parse(data)
-
-                if (data.code == 0) {
-					console.log(`鱼塘浏览商品成功`);
-					console.log(`获得${data.data.userTaskLogId}`);
-					userTaskLogId1 = data.data.userTaskLogId;
-
-                } else {
-					console.log(`鱼塘浏览商品失败,${data.msg}`)
-
-                }
-            } catch (e) {
-
-            } finally {
-
-                resolve()
-            }
-        }, timeout)
-    })
+        resolve()
+      }
+    }, timeout)
+  })
 }
 
 
 // 功能6
 // 鱼塘浏览收获
 function shjl(timeout = 0) {
-    return new Promise((resolve) => {
-		let headers = pubheader()
-        let url = {
-            url: `https://farm.api.ddxq.mobi/api/v2/task/reward?api_version=9.1.0&app_client_id=1&uid=${uid}&native_version=&latitude=${latitude}&longitude=${longitude}&gameId=1&userTaskLogId=` + userTaskLogId1,
-            headers: headers,
+  return new Promise((resolve) => {
+    let headers = pubheader()
+    let url = {
+      url: `https://farm.api.ddxq.mobi/api/v2/task/reward?api_version=9.1.0&app_client_id=1&uid=${uid}&native_version=&latitude=${latitude}&longitude=${longitude}&gameId=1&userTaskLogId=` + userTaskLogId1,
+      headers: headers,
+    }
+
+    $.get(url, async (err, resp, data) => {
+      try {
+
+        data = JSON.parse(data)
+
+        if (data.code == 0) {
+          console.log(`\n`);
+          console.log(`鱼塘收获奖励成功`);
+          console.log(`获得${data.data.rewards[0].amount}`);
+
+        } else {
+          console.log(`鱼塘收获奖励失败,${data.msg}`)
+
         }
+      } catch (e) {
 
-        $.get(url, async (err, resp, data) => {
-            try {
+      } finally {
 
-                data = JSON.parse(data)
-
-                if (data.code == 0) {
-					console.log(`鱼塘收获奖励成功`)
-					console.log(`获得${data.data.rewards[0].amount}`)
-
-                } else {
-					console.log(`鱼塘收获奖励失败,${data.msg}`)
-
-                }
-            } catch (e) {
-
-            } finally {
-
-                resolve()
-            }
-        }, timeout)
-    })
+        resolve()
+      }
+    }, timeout)
+  })
 }
 
 
