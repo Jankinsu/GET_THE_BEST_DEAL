@@ -80,19 +80,23 @@ let propsId2 = "";
         await $.wait(1000);
         await fwmm2();
         await $.wait(1000);
-/*
-        //循环运行
+
+        //循环运行喂鱼10次
         for (let c = 0; c < 10; c++) {
           $.index = c + 1
           await ytwy() //你要执行的版块
           await $.wait(3000) //你要延迟的时间  1000=1秒
         }
-*/
-        for (let c = 0; c < 5; c++) {
+
+        for (let c = 0; c < 10; c++) {
           $.index = c + 1
-          await gyjs() //你要执行的版块
+          await gyjs() //果园浇水10次
           await $.wait(3000) //你要延迟的时间  1000=1秒
         }
+        await $.wait(10000);
+        await water_10();
+
+
 
 
       }
@@ -323,6 +327,46 @@ function gyjs(timeout = 0) {
     }, timeout)
   })
 }
+
+
+// 领取浇水10次奖励
+function water_10(timeout = 0) {
+    return new Promise((resolve) => {
+		let headers = pubheader()
+		headers["Origin"] = "https://orchard-m.ddxq.mobi";
+		headers["Referer"] = "https://orchard-m.ddxq.mobi/?is_nav_hide=true&isResetAudio=true&s=mine_orchard";
+		headers["DDMC-GAME-TID"] = "2";
+        let url = {
+            url: `https://farm.api.ddxq.mobi/api/v2/task/achieve?api_version=9.1.0&app_client_id=1&native_version=&uid=${uid}&latitude=${latitude}&longitude=${longitude}&taskCode=FEED_N_TIMES`,
+            headers: headers,
+        }
+
+        $.get(url, async (err, resp, data) => {
+            try {
+
+                data = JSON.parse(data)
+
+                if (data.code == 0) {
+					console.log(`领取10次浇水奖励成功`)
+					console.log(`获得${data.data.rewards[0].amount}`)
+
+                } else {
+					console.log(`领取10次浇水失败,${data.msg}`)
+
+                }
+            } catch (e) {
+
+            } finally {
+
+                resolve()
+            }
+        }, timeout)
+    })
+}
+
+
+
+
 
 
 

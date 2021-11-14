@@ -98,16 +98,16 @@ let uuid_yt;
           await $.wait(1000 * (1 + Math.round(2 * Math.random())));
           // 鱼塘浏览
           await llsp();
-          await $.wait(1000 * (1 + Math.round(2 * Math.random())));
+          await $.wait(1000 * (5 + Math.round(2 * Math.random())));
           await $.wait(30000);
           // 收获鱼塘浏览奖励
           await shjl();
           // 查询果园id
           await getuuid();
-          await $.wait(1000 * (1 + Math.round(2 * Math.random())));          
+          await $.wait(1000 * (1 + Math.round(2 * Math.random())));
           // 果园浏览
           await llsp2();
-          await $.wait(1000 * (1 + Math.round(2 * Math.random())));
+          await $.wait(1000 * (5 + Math.round(2 * Math.random())));
           await $.wait(30000);
           // 收获果园奖励
           await shjl2();
@@ -535,7 +535,7 @@ function llsp2(timeout = 0) {
 
                 if (data.code == 0) {
                   console.log(`\n`);
-                  console.log(`鱼塘浏览商品成功`);
+                  console.log(`果园浏览商品成功`);
                   console.log(`获得${data.data.userTaskLogId}`);
                   userTaskLogId2 = data.data.userTaskLogId;
 

@@ -375,53 +375,15 @@ function fdqd2(timeout = 0) {
     })
 }
 
-//果园浏览商品
-function llsp2(timeout = 0) {
-    return new Promise((resolve) => {
-		let headers = pubheader()
-		headers["Referer"] = `https://cms.api.ddxq.mobi/cms-service/client/page/v1/getPageInfo?uuid=${uuid_gy}&themeColor=e7fbd6&hideShare=true&gameType=Farm&gameTask=BROWSE_GOODS&s=mine_orchard&native_city_number=0101`;
-		headers["Origin"] = "https://cms.api.ddxq.mobi";
-		headers["DDMC-GAME-TID"]="2";
-        let url = {
-            url: `https://farm.api.ddxq.mobi/api/v2/task/achieve?api_version=9.28.0&app_client_id=3&native_version=9.39&city_number=0101&page_type=2&env=PE&latitude=${latitude}&longitude=${longitude}&gameId=2&taskCode=BROWSE_GOODS`,
-            headers: headers,
-        }
-
-        $.get(url, async (err, resp, data) => {
-            try {
-
-                data = JSON.parse(data)
-
-                if (data.code == 0) {
-					console.log(`鱼塘浏览商品成功`);
-					console.log(`获得${data.data.userTaskLogId}`);
-					userTaskLogId2 = data.data.userTaskLogId;
-
-                } else {
-					console.log(`鱼塘浏览商品失败,${data.msg}`)
-
-                }
-            } catch (e) {
-
-            } finally {
-
-                resolve()
-            }
-        }, timeout)
-    })
-}
-
-
-
-// 果园收获奖励
-function shjl2(timeout = 0) {
+// 领取浇水10次奖励
+function water_10(timeout = 0) {
     return new Promise((resolve) => {
 		let headers = pubheader()
 		headers["Origin"] = "https://orchard-m.ddxq.mobi";
 		headers["Referer"] = "https://orchard-m.ddxq.mobi/?is_nav_hide=true&isResetAudio=true&s=mine_orchard";
 		headers["DDMC-GAME-TID"] = "2";
         let url = {
-            url: `https://farm.api.ddxq.mobi/api/v2/task/reward?api_version=9.1.0&app_client_id=1&native_version=&uid=${uid}&latitude=${latitude}&longitude=${longitude}&userTaskLogId` + userTaskLogId2,
+            url: `https://farm.api.ddxq.mobi/api/v2/task/achieve?api_version=9.1.0&app_client_id=1&native_version=&uid=${uid}&latitude=${latitude}&longitude=${longitude}&taskCode=FEED_N_TIMES`,
             headers: headers,
         }
 
@@ -431,11 +393,11 @@ function shjl2(timeout = 0) {
                 data = JSON.parse(data)
 
                 if (data.code == 0) {
-					console.log(`果园收获奖励成功`)
+					console.log(`领取10次浇水奖励成功`)
 					console.log(`获得${data.data.rewards[0].amount}`)
 
                 } else {
-					console.log(`果园收获奖励失败,${data.msg}`)
+					console.log(`领取10次浇水失败,${data.msg}`)
 
                 }
             } catch (e) {
@@ -447,6 +409,9 @@ function shjl2(timeout = 0) {
         }, timeout)
     })
 }
+
+
+
 
 
 
