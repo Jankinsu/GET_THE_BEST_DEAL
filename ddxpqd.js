@@ -102,6 +102,15 @@ let uuid_yt;
           await $.wait(30000);
           // 收获鱼塘浏览奖励
           await shjl();
+          // 查询果园id
+          await getuuid();
+          await $.wait(1000 * (1 + Math.round(2 * Math.random())));          
+          // 果园浏览
+          await llsp2();
+          await $.wait(1000 * (1 + Math.round(2 * Math.random())));
+          await $.wait(30000);
+          // 收获果园奖励
+          await shjl2();
 
 
         }
@@ -113,7 +122,7 @@ let uuid_yt;
 .catch((e) => $.logErr(e))
   .finally(() => $.done())
 
-
+// 函数1 获取ck
 //使用ddxpsum 的ck
 function ddxpsumck() {
   if ($request.url.indexOf("不用管") > -1) {
@@ -134,7 +143,7 @@ function ddxpsumck() {
   }
 }
 
-
+// 函数2 生成公共header
 // 生成公共header
 function pubheader() {
 
@@ -151,7 +160,7 @@ function pubheader() {
   }
 }
 
-
+// 函数3
 // 设置若干参数
 function setp(ddxpsumurl) {
   let s = ddxpsumurl.split('?');
@@ -171,7 +180,7 @@ function setp(ddxpsumurl) {
 
 
 
-//功能 1
+//函数 4
 //签到领积分
 function ddxpqd(timeout = 0) {
   return new Promise((resolve) => {
@@ -222,7 +231,7 @@ function ddxpqd(timeout = 0) {
   })
 }
 
-
+// 函数5
 // 访问task list
 function TaskId(timeout = 0) {
   return new Promise((resolve) => {
@@ -270,7 +279,7 @@ function TaskId(timeout = 0) {
   })
 }
 
-// 功能 2
+// 函数 6
 // 翻翻牌
 function ddxpfp(timeout = 0) {
   return new Promise((resolve) => {
@@ -316,7 +325,7 @@ function ddxpfp(timeout = 0) {
   })
 }
 
-// 功能 3
+// 函数7
 // 翻牌领赏
 function ddxpfpls(timeout = 0) {
   return new Promise((resolve) => {
@@ -351,7 +360,7 @@ function ddxpfpls(timeout = 0) {
   })
 }
 
-// 功能 4
+// 函数 8
 // 领取下单任务
 function ddxplqxd(timeout = 0) {
   return new Promise((resolve) => {
@@ -386,7 +395,7 @@ function ddxplqxd(timeout = 0) {
   })
 }
 
-// 功能 5
+// 函数 9
 // 鱼塘浏览商品
 function llsp(timeout = 0) {
   return new Promise((resolve) => {
@@ -425,7 +434,7 @@ function llsp(timeout = 0) {
 }
 
 
-// 功能6
+// 函数 10
 // 鱼塘浏览收获
 function shjl(timeout = 0) {
   return new Promise((resolve) => {
@@ -458,6 +467,134 @@ function shjl(timeout = 0) {
     }, timeout)
   })
 }
+
+
+// 获取果园uuid
+function getuuid(timeout = 0) {
+    return new Promise((resolve) => {
+		let headers = pubheader()
+		headers["Origin"] = "https://orchard-m.ddxq.mobi";
+		headers["Referer"] = "https://orchard-m.ddxq.mobi/?is_nav_hide=true&isResetAudio=true&s=mine_orchard";
+		headers["DDMC-GAME-TID"] = "2";
+        let url = {
+            url: `https://farm.api.ddxq.mobi/api/v2/task/list-orchard?api_version=9.1.0&app_client_id=1&native_version=&uid=${uid}&latitude=${latitude}&longitude=${longitude}&reward=FEED&cityCode=0101`,
+            headers: headers,
+        }
+
+        $.get(url, async (err, resp, data) => {
+            try {
+
+                data = JSON.parse(data)
+
+                if (data.code == 0) {
+                  link = data.data.userTasks[0].cmsLink;
+                  obj = new URL(link);
+                  paras = obj.search.slice(1, -1).split("&");
+                  for (let para of paras) {
+                    if (para.split("=")[0] == "uuid") {
+                      uuid_gy = para.split("=")[1];
+                    }
+
+                  }
+                  console.log(`\n`);
+                  console.log(`果园uuid获取成功：${uuid_gy}`);
+
+                } else {
+					console.log(`果园uuid获取失败,${data.msg}`)
+
+                }
+            } catch (e) {
+
+            } finally {
+
+                resolve()
+            }
+        }, timeout)
+    })
+}
+
+
+
+// 函数11
+//果园浏览商品
+function llsp2(timeout = 0) {
+    return new Promise((resolve) => {
+		let headers = pubheader()
+		headers["Referer"] = `https://cms.api.ddxq.mobi/cms-service/client/page/v1/getPageInfo?uuid=${uuid_gy}&themeColor=e7fbd6&hideShare=true&gameType=Farm&gameTask=BROWSE_GOODS&s=mine_orchard&native_city_number=0101`;
+		headers["Origin"] = "https://cms.api.ddxq.mobi";
+		headers["DDMC-GAME-TID"]="2";
+        let url = {
+            url: `https://farm.api.ddxq.mobi/api/v2/task/achieve?api_version=9.28.0&app_client_id=3&native_version=9.39&city_number=0101&page_type=2&env=PE&latitude=${latitude}&longitude=${longitude}&gameId=2&taskCode=BROWSE_GOODS`,
+            headers: headers,
+        }
+
+        $.get(url, async (err, resp, data) => {
+            try {
+
+                data = JSON.parse(data)
+
+                if (data.code == 0) {
+                  console.log(`\n`);
+                  console.log(`鱼塘浏览商品成功`);
+                  console.log(`获得${data.data.userTaskLogId}`);
+                  userTaskLogId2 = data.data.userTaskLogId;
+
+                } else {
+					console.log(`鱼塘浏览商品失败,${data.msg}`)
+
+                }
+            } catch (e) {
+
+            } finally {
+
+                resolve()
+            }
+        }, timeout)
+    })
+}
+
+
+// 函数 12
+// 果园收获奖励
+function shjl2(timeout = 0) {
+    return new Promise((resolve) => {
+		let headers = pubheader()
+		headers["Origin"] = "https://orchard-m.ddxq.mobi";
+		headers["Referer"] = "https://orchard-m.ddxq.mobi/?is_nav_hide=true&isResetAudio=true&s=mine_orchard";
+		headers["DDMC-GAME-TID"] = "2";
+        let url = {
+            url: `https://farm.api.ddxq.mobi/api/v2/task/reward?api_version=9.1.0&app_client_id=1&native_version=&uid=${uid}&latitude=${latitude}&longitude=${longitude}&userTaskLogId` + userTaskLogId2,
+            headers: headers,
+        }
+
+        $.get(url, async (err, resp, data) => {
+            try {
+
+                data = JSON.parse(data)
+
+                if (data.code == 0) {
+					console.log(`果园收获奖励成功`)
+					console.log(`获得${data.data.rewards[0].amount}`)
+
+                } else {
+					console.log(`果园收获奖励失败,${data.msg}`)
+
+                }
+            } catch (e) {
+
+            } finally {
+
+                resolve()
+            }
+        }, timeout)
+    })
+}
+
+
+
+
+
+
 
 
 
