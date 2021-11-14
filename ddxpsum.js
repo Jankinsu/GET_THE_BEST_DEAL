@@ -19,7 +19,6 @@ let ddxpsumhd = $.getdata('ddxpsumhd')
 
 
 
-
 !(async () => {
     if (typeof $request !== "undefined") {
 
@@ -375,40 +374,6 @@ function fdqd2(timeout = 0) {
     })
 }
 
-// 领取浇水10次奖励
-function water_10(timeout = 0) {
-    return new Promise((resolve) => {
-		let headers = pubheader()
-		headers["Origin"] = "https://orchard-m.ddxq.mobi";
-		headers["Referer"] = "https://orchard-m.ddxq.mobi/?is_nav_hide=true&isResetAudio=true&s=mine_orchard";
-		headers["DDMC-GAME-TID"] = "2";
-        let url = {
-            url: `https://farm.api.ddxq.mobi/api/v2/task/achieve?api_version=9.1.0&app_client_id=1&native_version=&uid=${uid}&latitude=${latitude}&longitude=${longitude}&taskCode=FEED_N_TIMES`,
-            headers: headers,
-        }
-
-        $.get(url, async (err, resp, data) => {
-            try {
-
-                data = JSON.parse(data)
-
-                if (data.code == 0) {
-					console.log(`领取10次浇水奖励成功`)
-					console.log(`获得${data.data.rewards[0].amount}`)
-
-                } else {
-					console.log(`领取10次浇水失败,${data.msg}`)
-
-                }
-            } catch (e) {
-
-            } finally {
-
-                resolve()
-            }
-        }, timeout)
-    })
-}
 
 
 
