@@ -9,12 +9,12 @@
 const $ = new Env('签到领积分');
 let status;
 
-status = (status = ($.getval("jiaochengstatus") || "1")) > 1 ? `${status}` : "";
+status = (status = ($.getval("ddxpsumstatus") || "1")) > 1 ? `${status}` : "";
 
-const jiaochengurlArr = [], jiaochenghdArr = [], jiaochengcount = ''
+const ddxpsumurlArr = [], ddxpsumhdArr = [], ddxpsumcount = ''
 
-let jiaochengurl = $.getdata('jiaochengurl')
-let jiaochenghd = $.getdata('jiaochenghd')
+let ddxpsumurl = $.getdata('ddxpsumurl')
+let ddxpsumhd = $.getdata('ddxpsumhd')
 
 let uid = "";
 let latitude = "";
@@ -26,19 +26,19 @@ let station_id = "";
 !(async () => {
     if (typeof $request !== "undefined") {
 
-        jiaochengck()
+        ddxpsumck()
 
     } else {
-        jiaochengurlArr.push($.getdata('jiaochengurl'))
-        jiaochenghdArr.push($.getdata('jiaochenghd'))
+        ddxpsumurlArr.push($.getdata('ddxpsumurl'))
+        ddxpsumhdArr.push($.getdata('ddxpsumhd'))
 
 
-        let jiaochengcount = ($.getval('jiaochengcount') || '1');
+        let ddxpsumcount = ($.getval('ddxpsumcount') || '1');
 
-        for (let i = 2; i <= jiaochengcount; i++) {
+        for (let i = 2; i <= ddxpsumcount; i++) {
 
-            jiaochengurlArr.push($.getdata(`jiaochengurl${i}`))
-            jiaochenghdArr.push($.getdata(`jiaochenghd${i}`))
+            ddxpsumurlArr.push($.getdata(`ddxpsumurl${i}`))
+            ddxpsumhdArr.push($.getdata(`ddxpsumhd${i}`))
 
 
         }
@@ -50,12 +50,12 @@ let station_id = "";
                 8 * 60 * 60 * 1000
             ).toLocaleString()} ===============================================\n`);
 
-        for (let i = 0; i < jiaochenghdArr.length; i++) {
+        for (let i = 0; i < ddxpsumhdArr.length; i++) {
 
-            if (jiaochenghdArr[i]) {
+            if (ddxpsumhdArr[i]) {
 
-                jiaochengurl = jiaochengurlArr[i];
-                jiaochenghd = jiaochenghdArr[i];
+                ddxpsumurl = ddxpsumurlArr[i];
+                ddxpsumhd = ddxpsumhdArr[i];
 
 
                 $.index = i + 1;
@@ -82,15 +82,15 @@ let station_id = "";
 
 
 //不使用
-function jiaochengck() {
+function ddxpsumck() {
     if ($request.url.indexOf("不使用") > -1) {
-        const jiaochengurl = $request.url
-        if (jiaochengurl) $.setdata(jiaochengurl, `jiaochengurl${status}`)
-        $.log(jiaochengurl)
+        const ddxpsumurl = $request.url
+        if (ddxpsumurl) $.setdata(ddxpsumurl, `ddxpsumurl${status}`)
+        $.log(ddxpsumurl)
 
-        const jiaochenghd = JSON.stringify($request.headers)
-        if (jiaochenghd) $.setdata(jiaochenghd, `jiaochenghd${status}`)
-        $.log(jiaochenghd)
+        const ddxpsumhd = JSON.stringify($request.headers)
+        if (ddxpsumhd) $.setdata(ddxpsumhd, `ddxpsumhd${status}`)
+        $.log(ddxpsumhd)
 
         $.msg($.name, "", `签到领积分${status}获取headers成功`)
 
