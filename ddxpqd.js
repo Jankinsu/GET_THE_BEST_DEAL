@@ -29,8 +29,12 @@ let uid = "";
 let latitude = "";
 let longitude = "";
 let station_id = "";
-
-
+let userTaskLogId1 = "";
+let userTaskLogId1 = "";
+let userTaskLogId_receive = "";
+let userTaskLogId_luckyDraw = "";
+let uuid_gy;
+let uuid_yt;
 
   !(async () => {
     if (typeof $request !== "undefined") {
@@ -74,10 +78,30 @@ let station_id = "";
           //循环运行
           for (let c = 0; c < 1; c++) {
             $.index = c + 1
-            setp(ddxpsumurl)
-            await ddxpqd() //你要执行的版块
+            //设置参数
+            setp(ddxpsumurl);
+            // 签到领积分
+            await ddxpqd();
+            await $.wait(1000*(1+ Math.round(2*Math.random()))) ;
+            // 获取task receive 和 lucky draw id
+            await TaskId();
+            await $.wait(1000*(1+ Math.round(2*Math.random())));
+            // 翻牌
+            await ddxpfp();
+            await $.wait(1000*(1+ Math.round(2*Math.random())));
+            // 领取下单任务
+            await ddxplqxd();
+            await $.wait(1000*(1+ Math.round(2*Math.random())));
+            // 翻牌领赏
+            await ddxpfpls();
+            await $.wait(1000*(1+ Math.round(2*Math.random())));
+            // 鱼塘浏览
+            await llsp();
+            await $.wait(1000*(1+ Math.round(2*Math.random())));
+            await $.wait(30000);
+            // 收获鱼塘浏览奖励
+            await shjl();
 
-            await $.wait(1000) //你要延迟的时间  1000=1秒
 
           }
         }
@@ -144,8 +168,8 @@ function setp(ddxpsumurl){
 
 
 
-
-//版块
+//功能 1
+//签到领积分
 function ddxpqd(timeout = 0) {
   return new Promise((resolve) => {
     headers = pubheader();
@@ -195,15 +219,238 @@ function ddxpqd(timeout = 0) {
 }
 
 
+// 访问task list
+function TaskId(timeout = 0) {
+  return new Promise((resolve) => {
+    let link,paras;
+    let headers = pubheader()
+    let url = {
+      url: `https://farm.api.ddxq.mobi/api/v2/task/list?api_version=9.1.0&app_client_id=1&native_version=&app_version=9.39.0&latitude=${latitude}&longitude=${longitude}&gameId=1&cityCode=0101`,
+      headers: headers,
+    }
+
+    $.get(url, async (err, resp, data) => {
+      try {
+
+        data = JSON.parse(data)
+
+        if (data.code == 0) {
+          userTaskLogId_luckyDraw = data.data.userTasks[8].taskCode;
+          userTaskLogId_receive = data.data.userTasks[0].userTaskLogId;
+          link = data.data.userTasks[1].cmsLink;
+          paras = link.search.slice(1,-1).split("&")
+          for(para of paras){
+            if (para.split("=")[0] == "uuid"){uuid_yt = para.split("=")[1];break};
+          }
+          console.log(`访问taskid成功，获得receive_task_id:${userTaskLogId_receive}   luckyDrawId:${userTaskLogId_luckyDraw}`);
+          console.log(`browse_user_id uuid获取成功:${uuid_yt}`);
+
+
+        } else {
+          console.log(`访问taskid失败，${data.msg}`);
+
+
+        }
+      } catch (e) {
+
+      } finally {
+
+        resolve()
+      }
+    }, timeout)
+  })
+}
+
+// 功能 2
+// 翻翻牌
+function ddxpfp(timeout = 0) {
+  return new Promise((resolve) => {
+    headers = pubheader();
+    headers["Origin"] = "https://activity.m.ddxq.mobi";
+    headers["Referer"] = "https://activity.m.ddxq.mobi";
+    headers["DDMC-GAME-TID"] = 1;
+
+    let url = {
+      url: `https://farm.api.ddxq.mobi/api/v2/lucky-draw-activity/draw?api_version=9.7.3&app_version=1.0.0&app_client_id=3&native_version=9.39.0&city_number=0101&latitude=${latitude}&longitude=${longitude}&gameId=1`,
+      headers: headers,
+      body:{
+                api_version: "9.7.3",
+                app_version: "1.0.0",
+                app_client_id: 3,
+                native_version: "9.39.0",
+                city_number: 0101,
+                latitude: latitude,
+                longitude: longitude,
+            },
+    }
+    $.get(url, async (err, resp, data) => {
+      try {
+
+        data = JSON.parse(data)
+
+        if (data.success) {
+          console.log(`${data.msg}, ${data.data.msg}, ${data.data.chosen.rewardText}`);
+
+
+        } else {
+          console.log(`翻牌失败， ${data.msg}`);
+
+        }
+      } catch (e) {
+
+      } finally {
+
+        resolve()
+      }
+    }, timeout)
+  })
+}
+
+// 功能 3
+// 翻牌领赏
+function ddxpfpls(timeout = 0) {
+  return new Promise((resolve) => {
+    let headers = pubheader()
+    let url = {
+      url: `https://farm.api.ddxq.mobi/api/v2/task/reward?api_version=9.1.0&app_client_id=1&native_version=&app_version=9.39.0&latitude=${latitude}&longitude=${longitude}&gameId=1&userTaskLogId=${userTaskLogId_luckyDraw}`,
+      headers: headers,
+    }
+
+    $.get(url, async (err, resp, data) => {
+      try {
+
+        data = JSON.parse(data)
+
+        if (data.code == 0) {
+          console.log(`翻牌领赏成功，领赏数目:${data.data.rewards[0].amount}`);
+
+
+        } else {
+          console.log(`翻牌领赏失败，${data.msg}`);
+
+
+        }
+      } catch (e) {
+
+      } finally {
+
+        resolve()
+      }
+    }, timeout)
+  })
+}
+
+// 功能 4
+// 领取下单任务
+function ddxplqxd(timeout = 0) {
+  return new Promise((resolve) => {
+    let headers = pubheader()
+    let url = {
+      url: `https://farm.api.ddxq.mobi/api/v2/task/receive?api_version=9.1.0&app_client_id=1&native_version=&app_version=9.39.0&latitude=${latitude}&longitude=${longitude}&gameId=1&taskCode=ANY_ORDER`,
+      headers: headers,
+    }
+
+    $.get(url, async (err, resp, data) => {
+      try {
+
+        data = JSON.parse(data)
+
+        if (data.code == 0) {
+          console.log(`领取下单任务成功，userTaskLogId:${data.data.userTaskLogId}`);
+
+
+        } else {
+          console.log(`领取下单任务失败，${data.msg}`);
+
+
+        }
+      } catch (e) {
+
+      } finally {
+
+        resolve()
+      }
+    }, timeout)
+  })
+}
+
+// 功能 5
+// 鱼塘浏览商品
+function llsp(timeout = 0) {
+    return new Promise((resolve) => {
+		let headers = pubheader()
+		headers["Referer"] = `https://cms.api.ddxq.mobi/cms-service/client/page/v1/getPageInfo?uuid=${uuid_yt}&themeColor=72b1ff&hideShare=true&gameType=Farm&gameTask=BROWSE_GOODS&s=mine_farm_new&native_city_number=0101`;
+		headers["Origin"] = "https://cms.api.ddxq.mobi";
+		headers["DDMC-GAME-TID"]="1";
+        let url = {
+            url: `https://farm.api.ddxq.mobi/api/v2/task/achieve?api_version=9.28.0&app_client_id=3&native_version=9.39&city_number=0101&page_type=2&env=PE&latitude=${latitude}&longitude=${longitude}&gameId=1&taskCode=BROWSE_GOODS`,
+            headers: headers,
+        }
+
+        $.get(url, async (err, resp, data) => {
+            try {
+
+                data = JSON.parse(data)
+
+                if (data.code == 0) {
+					console.log(`鱼塘浏览商品成功`);
+					console.log(`获得${data.data.userTaskLogId}`);
+					userTaskLogId1 = data.data.userTaskLogId;
+
+                } else {
+					console.log(`鱼塘浏览商品失败,${data.msg}`)
+
+                }
+            } catch (e) {
+
+            } finally {
+
+                resolve()
+            }
+        }, timeout)
+    })
+}
+
+
+// 功能6
+// 鱼塘浏览收获
+function shjl(timeout = 0) {
+    return new Promise((resolve) => {
+		let headers = pubheader()
+        let url = {
+            url: `https://farm.api.ddxq.mobi/api/v2/task/reward?api_version=9.1.0&app_client_id=1&uid=${uid}&native_version=&latitude=${latitude}&longitude=${longitude}&gameId=1&userTaskLogId=` + userTaskLogId1,
+            headers: headers,
+        }
+
+        $.get(url, async (err, resp, data) => {
+            try {
+
+                data = JSON.parse(data)
+
+                if (data.code == 0) {
+					console.log(`鱼塘收获奖励成功`)
+					console.log(`获得${data.data.rewards[0].amount}`)
+
+                } else {
+					console.log(`鱼塘收获奖励失败,${data.msg}`)
+
+                }
+            } catch (e) {
+
+            } finally {
+
+                resolve()
+            }
+        }, timeout)
+    })
+}
 
 
 
 
 
 
-
-
-
+// 环境模块，支持多账号
 //env模块    不要动
 function Env(t, e) {
   class s {
