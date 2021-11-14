@@ -2,7 +2,7 @@
 自动喂鱼和果园浇水,使用ddxpsum的url和header
 2021/11/13
 [task local]
-17 21 * * * https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/ddxpwy.js, tag=自动喂鱼, img-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/dingdong.png, enabled=true
+17 22 * * * https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/ddxpwy.js, tag=自动喂鱼, img-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/dingdong.png, enabled=true
 
 */
 

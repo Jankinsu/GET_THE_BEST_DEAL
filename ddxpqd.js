@@ -1,56 +1,54 @@
 /*
-9.15
 
-软件：  羊毛
-收益：  每天200W
-注意事项 ： 运行js时不要打开软件app
+17 7 * * * https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/ddxpqd.js, tag=签到领积分, img-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/dingdong.png, enabled=true
 
-获取ck：  打开软件即可------
-
-重写：-------
-
-主机名：-------
 
 */
 
 
 
-//只需要把 jiaocheng 批量替换成你想取的名字
-// 把  教程  改成软件名
+//只需要把 ddxpsum 批量替换成你想取的名字
+// 把  签到领积分  改成软件名
 
-const $ = new Env('教程');
+const $ = new Env('签到领积分');
 let status;
 
-status = (status = ($.getval("jiaochengstatus") || "1")) > 1 ? `${status}` : "";
+status = (status = ($.getval("ddxpsumstatus") || "1")) > 1 ? `${status}` : "";
 
-const jiaochengurlArr = [],
-  jiaochenghdArr = [],
-  jiaochengbodyArr = [],
-  jiaochengcount = ''
+const ddxpsumurlArr = [],
+  ddxpsumhdArr = [],
+//  ddxpsumbodyArr = [],
+  ddxpsumcount = ''
 
-let jiaochengurl = $.getdata('jiaochengurl')
-let jiaochenghd = $.getdata('jiaochenghd')
-let jiaochengbody = $.getdata('jiaochengbody')
+let ddxpsumurl = $.getdata('ddxpsumurl')
+let ddxpsumhd = $.getdata('ddxpsumhd')
+//let ddxpsumbody = $.getdata('ddxpsumbody')
+
+
+let uid = "";
+let latitude = "";
+let longitude = "";
+let station_id = "";
 
 
 
   !(async () => {
     if (typeof $request !== "undefined") {
 
-      jiaochengck()
+      ddxpsumck()
 
     } else {
-      jiaochengurlArr.push($.getdata('jiaochengurl'))
-      jiaochenghdArr.push($.getdata('jiaochenghd'))
-      jiaochengbodyArr.push($.getdata('jiaochengbody'))
+      ddxpsumurlArr.push($.getdata('ddxpsumurl'))
+      ddxpsumhdArr.push($.getdata('ddxpsumhd'))
+//      ddxpsumbodyArr.push($.getdata('ddxpsumbody'))
 
-      let jiaochengcount = ($.getval('jiaochengcount') || '1');
+      let ddxpsumcount = ($.getval('ddxpsumcount') || '1');
 
-      for (let i = 2; i <= jiaochengcount; i++) {
+      for (let i = 2; i <= ddxpsumcount; i++) {
 
-        jiaochengurlArr.push($.getdata(`jiaochengurl${i}`))
-        jiaochenghdArr.push($.getdata(`jiaochenghd${i}`))
-        jiaochengbodyArr.push($.getdata(`jiaochengbody${i}`))
+        ddxpsumurlArr.push($.getdata(`ddxpsumurl${i}`))
+        ddxpsumhdArr.push($.getdata(`ddxpsumhd${i}`))
+//        ddxpsumbodyArr.push($.getdata(`ddxpsumbody${i}`))
 
       }
 
@@ -61,23 +59,24 @@ let jiaochengbody = $.getdata('jiaochengbody')
                 8 * 60 * 60 * 1000
             ).toLocaleString()} ===============================================\n`);
 
-      for (let i = 0; i < jiaochenghdArr.length; i++) {
+      for (let i = 0; i < ddxpsumhdArr.length; i++) {
 
-        if (jiaochenghdArr[i]) {
+        if (ddxpsumhdArr[i]) {
 
-          jiaochengurl = jiaochengurlArr[i];
-          jiaochenghd = jiaochenghdArr[i];
-          jiaochengbody = jiaochengbodyArr[i];
+          ddxpsumurl = ddxpsumurlArr[i];
+          ddxpsumhd = ddxpsumhdArr[i];
+//          ddxpsumbody = ddxpsumbodyArr[i];
 
           $.index = i + 1;
-          console.log(`\n\n开始【教程${$.index}】`)
+          console.log(`\n\n开始【签到领积分${$.index}】`)
 
 
           //循环运行
-          for (let c = 0; c < 200; c++) {
+          for (let c = 0; c < 1; c++) {
             $.index = c + 1
+            setp(ddxpsumurl)
+            await ddxpqd() //你要执行的版块
 
-            await bankuai() //你要执行的版块
             await $.wait(1000) //你要延迟的时间  1000=1秒
 
           }
@@ -91,51 +90,97 @@ let jiaochengbody = $.getdata('jiaochengbody')
 
 
 //使用ddxpsum 的ck
-function jiaochengck() {
+function ddxpsumck() {
   if ($request.url.indexOf("不用管") > -1) {
-    const jiaochengurl = $request.url
-    if (jiaochengurl) $.setdata(jiaochengurl, `jiaochengurl${status}`)
-    $.log(jiaochengurl)
+    const ddxpsumurl = $request.url
+    if (ddxpsumurl) $.setdata(ddxpsumurl, `ddxpsumurl${status}`)
+    $.log(ddxpsumurl)
 
-    const jiaochenghd = JSON.stringify($request.headers)
-    if (jiaochenghd) $.setdata(jiaochenghd, `jiaochenghd${status}`)
-    $.log(jiaochenghd)
+    const ddxpsumhd = JSON.stringify($request.headers)
+    if (ddxpsumhd) $.setdata(ddxpsumhd, `ddxpsumhd${status}`)
+    $.log(ddxpsumhd)
 
-    const jiaochengbody = $request.body
-    if (jiaochengbody) $.setdata(jiaochengbody, `jiaochengbody${status}`)
-    $.log(jiaochengbody)
+    const ddxpsumbody = $request.body
+    if (ddxpsumbody) $.setdata(ddxpsumbody, `ddxpsumbody${status}`)
+    $.log(ddxpsumbody)
 
-    $.msg($.name, "", `教程${status}获取headers成功`)
+    $.msg($.name, "", `签到领积分${status}获取headers成功`)
 
   }
 }
 
 
+// 生成公共header
+function pubheader(){
+
+	return {"Accept": "*/*",
+	"Accept-Encoding": "gzip, deflate, br",
+	"Accept-Language": "en-us",
+	"Connection": "keep-alive",
+	"Cookie": ddxpsumhd,
+	"Host": "farm.api.ddxq.mobi",
+	"Origin": "https://game.m.ddxq.mobi",
+	"Referer": "https://game.m.ddxq.mobi/index.html",
+	"User-Agent": `Mozilla/5.0 (iPad; CPU OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 xzone/9.36.2 station_id/${station_id}`}
+}
 
 
+// 设置若干参数
+function setp(ddxpsumurl){
+	let s = ddxpsumurl.split('?');
+	let ss = s[s.length-1].split('&');
+	let info = {};
+	for(let val of ss){
+		k = val.split('=')[0];
+		v = val.split('=')[1];
+		info[k] = v;
+	}
+	uid = info['uid'];
+	latitude = info['latitude'];
+	longitude = info['longitude'];
+	station_id = info['station_id'];
+
+}
 
 
 
 
 //版块
-function bankuai(timeout = 0) {
+function ddxpqd(timeout = 0) {
   return new Promise((resolve) => {
+    headers = pubheader();
+    headers["Host"] = "sunquan.api.ddxq.mobi";
+    headers["Origin"] = "https://activity.m.ddxq.mobi";
+    headers["Referer"] = "https://activity.m.ddxq.mobi";
+    headers["Content-Length"] = 166;
 
 
     let url = {
-      url: ``,
-      headers: JSON.parse(jiaochenghd),
-      body: ``,
+      url: `https://sunquan.api.ddxq.mobi/api/v2/user/signin/`,
+      headers: headers,
+      body:{
+                api_version: "9.7.3",
+                app_version: "1.0.0",
+                app_client_id: 3,
+                native_version: "9.39.0",
+                city_number: 0101,
+                latitude: latitude,
+                longitude: longitude,
+            },
     }
     $.post(url, async (err, resp, data) => {
       try {
 
         data = JSON.parse(data)
 
-        if (data.status == 0) {
+        if (data.success) {
+          console.log(`签到成功，获得积分数目：${data.data.point}`);
+          console.log(`获得ticket_money : ${data.data.ticket_money}`);
 
 
         } else {
+          console.log(`签到失败， ${data.msg}`);
+
 
 
         }
@@ -148,6 +193,12 @@ function bankuai(timeout = 0) {
     }, timeout)
   })
 }
+
+
+
+
+
+
 
 
 
