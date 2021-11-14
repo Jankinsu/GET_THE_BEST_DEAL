@@ -20,6 +20,12 @@ let uid = "";
 let latitude = "";
 let longitude = "";
 let station_id = "";
+let userTaskLogId1 = "";
+let userTaskLogId1 = "";
+let userTaskLogId_receive = "";
+let userTaskLogId_luckyDraw = "";
+let uuid_gy;
+let uuid_yt;
 
 
 
@@ -62,7 +68,7 @@ let station_id = "";
                 console.log(`\n\n开始【签到领积分${$.index}】`)
 
                 //循环运行
-                for (let c = 0; c < 200; c++) {
+                for (let c = 0; c < 1; c++) {
                     $.index = c + 1
                     setp(ddxpsumurl);
                     await ddqd()//你要执行的版块
