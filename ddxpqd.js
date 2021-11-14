@@ -83,7 +83,7 @@ let uuid_yt;
             await $.wait(1000);
             // 签到领积分
             await ddxpqd();
-/*            await $.wait(1000*(1+ Math.round(2*Math.random()))) ;
+            await $.wait(1000*(1+ Math.round(2*Math.random()))) ;
             // 获取task receive 和 lucky draw id
             await TaskId();
             await $.wait(1000*(1+ Math.round(2*Math.random())));
@@ -102,7 +102,7 @@ let uuid_yt;
             await $.wait(30000);
             // 收获鱼塘浏览奖励
             await shjl();
-*/
+
 
           }
         }
@@ -219,7 +219,7 @@ function ddxpqd(timeout = 0) {
   })
 }
 
-/*
+
 // 访问task list
 function TaskId(timeout = 0) {
   return new Promise((resolve) => {
@@ -447,7 +447,6 @@ function shjl(timeout = 0) {
 }
 
 
-*/
 
 
 
