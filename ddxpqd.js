@@ -94,6 +94,7 @@ let uuid_yt;
           await ddxplqxd();
           await $.wait(1000 * (1 + Math.round(2 * Math.random())));
           // 翻牌领赏
+          await &.wait(5000);
           await ddxpfpls();
           await $.wait(1000 * (1 + Math.round(2 * Math.random())));
           // 鱼塘浏览
@@ -540,7 +541,7 @@ function llsp2(timeout = 0) {
                   userTaskLogId2 = data.data.userTaskLogId;
 
                 } else {
-					console.log(`鱼塘浏览商品失败,${data.msg}`)
+					console.log(`果园浏览商品失败,${data.msg}`)
 
                 }
             } catch (e) {
