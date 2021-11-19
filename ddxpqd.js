@@ -90,27 +90,27 @@ let uuid_yt;
           // 翻牌
           await ddxpfp();
           await $.wait(1000 * (1 + Math.round(2 * Math.random())));
-          // 领取下单任务
-          await ddxplqxd();
-          await $.wait(1000 * (1 + Math.round(2 * Math.random())));
           // 翻牌领赏
-          await &.wait(5000);
-          await ddxpfpls();
+
+          await ddxpfpls()
           await $.wait(1000 * (1 + Math.round(2 * Math.random())));
           // 鱼塘浏览
           await llsp();
           await $.wait(1000 * (5 + Math.round(2 * Math.random())));
           await $.wait(30000);
-          // 收获鱼塘浏览奖励
-          await shjl();
           // 查询果园id
           await getuuid();
           await $.wait(1000 * (1 + Math.round(2 * Math.random())));
           // 果园浏览
-          await llsp2();
-          await $.wait(1000 * (5 + Math.round(2 * Math.random())));
+          await llsp2()
           await $.wait(30000);
-          // 收获果园奖励
+          // 收获鱼塘奖励
+          await shjl();
+          await $.wait(1000 * (1 + Math.round(2 * Math.random())));
+          // 领取下单
+          await ddxplqxd();
+          await $.wait(1000 * (1 + Math.round(2 * Math.random())));
+          // 果园收获奖励
           await shjl2();
 
 
@@ -232,6 +232,8 @@ function ddxpqd(timeout = 0) {
   })
 }
 
+
+
 // 函数5
 // 访问task list
 function TaskId(timeout = 0) {
@@ -280,6 +282,7 @@ function TaskId(timeout = 0) {
   })
 }
 
+
 // 函数 6
 // 翻翻牌
 function ddxpfp(timeout = 0) {
@@ -309,6 +312,7 @@ function ddxpfp(timeout = 0) {
 
         if (data.success) {
           console.log(`\n`);
+          userTaskLogId_luckyDraw=data.data.userTaskLogId_luckyDraw;
           console.log(`翻牌${data.msg}, ${data.data.msg}, ${data.data.chosen.rewardText}`);
 
 
@@ -325,7 +329,6 @@ function ddxpfp(timeout = 0) {
     }, timeout)
   })
 }
-
 // 函数7
 // 翻牌领赏
 function ddxpfpls(timeout = 0) {
@@ -342,13 +345,12 @@ function ddxpfpls(timeout = 0) {
         data = JSON.parse(data)
 
         if (data.code == 0) {
-          console.log(`\n`);
-          console.log(`翻牌领赏成功，领赏数目:${data.data.rewards[0].amount}`);
+          console.log(`\n`)
+          console.log(`翻牌领赏成功，领赏数目:${data.data.rewards[0].amount}`)
 
 
         } else {
-          console.log(`翻牌领赏失败，${data.msg}`);
-
+          console.log(`翻牌领赏失败，${data.msg}`)
 
         }
       } catch (e) {
@@ -564,7 +566,7 @@ function shjl2(timeout = 0) {
 		headers["Referer"] = "https://orchard-m.ddxq.mobi/?is_nav_hide=true&isResetAudio=true&s=mine_orchard";
 		headers["DDMC-GAME-TID"] = "2";
         let url = {
-            url: `https://farm.api.ddxq.mobi/api/v2/task/reward?api_version=9.1.0&app_client_id=1&native_version=&uid=${uid}&latitude=${latitude}&longitude=${longitude}&userTaskLogId` + userTaskLogId2,
+            url: `https://farm.api.ddxq.mobi/api/v2/task/reward?api_version=9.1.0&app_client_id=1&native_version=&uid=${uid}&latitude=${latitude}&longitude=${longitude}&userTaskLogId=${userTaskLogId2}`,
             headers: headers,
         }
 
@@ -590,11 +592,6 @@ function shjl2(timeout = 0) {
         }, timeout)
     })
 }
-
-
-
-
-
 
 
 
