@@ -67,11 +67,11 @@ let pojiehd = $.getdata('pojiehd')
                 console.log(`\n\n开始【吾爱破解签到${$.index}】`)
 
                 //循环运行
-                for (let c = 0; c < 200; c++) {
+                for (let c = 0; c < 1; c++) {
                     $.index = c + 1
 
 
-                    await bankuai()//你要执行的版块
+                    await pojieqd()//你要执行的版块
                     await $.wait(1000)//你要延迟的时间  1000=1秒
 
 
