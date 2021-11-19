@@ -28,12 +28,12 @@
             "script": "https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/ddxpsum.js"
     },
 	  {
-            "id": "cydxs",
-            "name": "成语大学士",
-            "keys": ["cydxshd","cydxsbody","cydxsspbody", "cydxshd2","cydxsbody2","cydxsspbody2", "cydxshd3","cydxsbody3","cydxsspbody3", "cydxshd4","cydxsbody4","cydxsspbody4", "cydxshd5","cydxsbody5","cydxsspbody5", "cydxshd6","cydxsbody6","cydxsspbody6", "cydxshd7","cydxsbody7","cydxsspbody7", "cydxshd8","cydxsbody8","cydxsspbody8", "cydxshd9","cydxsbody9","cydxsspbody9", "cydxshd10","cydxsbody10","cydxsspbody10"],
-            "author": "@YaphetS0903",
+            "id": "kjwj",
+            "name": "科技玩家签到",
+            "keys": ["kjwjurl","kjwjhd","kjwjbody","kjwjqdurl2","kjwjhd2","kjwjbody2"],
+            "author": "@jankinsu",
             "settings": [{
-            "id": "cydxsstatus",
+            "id": "kjwjqdtatus",
             "name": "当前账号",
             "val": "1",
             "type": "number",
@@ -46,10 +46,10 @@
             "type": "number",
             "desc": "需要几个账号，数字为几"
     }],
-            "repo": "https://raw.githubusercontent.com/YaphetS0903/JStest/main/cydxs.js",
-            "icons": ["https://raw.githubusercontent.com/YaphetS0903/JStest/main/image/YaphetS.jpg", "https://raw.githubusercontent.com/YaphetS0903/JStest/main/image/YaphetS.jpg"],
-            "script": "https://raw.githubusercontent.com/YaphetS0903/JStest/main/cydxs.js"
-    } 
+            "repo": "https://github.com/Jankinsu/GET_THE_BEST_DEAL",
+            "icons": ["https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/kjwj.png", "https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/kjwj.png"],
+            "script": "https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/kjwjqd.js"
+    }
 
 
 
