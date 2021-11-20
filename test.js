@@ -31,8 +31,6 @@ let kjwjqdurl = $.getdata('kjwjqdurl')
 let kjwjqdhd = $.getdata('kjwjqdhd')
 
 
-
-
   !(async () => {
     if (typeof $request !== "undefined") {
 
@@ -49,7 +47,6 @@ let kjwjqdhd = $.getdata('kjwjqdhd')
 
         kjwjqdurlArr.push($.getdata(`kjwjqdurl${i}`))
         kjwjqdhdArr.push($.getdata(`kjwjqdhd${i}`))
-
 
       }
 
@@ -113,19 +110,19 @@ function getindex(timeout = 0) {
     let url = {
       url: `https://www.kejiwanjia.com/jiaocheng`,
       let headers = {
-          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-          "Accept-Encoding": "gzip, deflate, br",
-          "Accept-Language": "en-us",
-          "Cache-Control": "max-age=0",
-          "Connection": "keep-alive",
-          "Cookie": kjwjqdhd.Cookie,
-          "User-Agent": "Mozilla/5.0 (iPad; CPU OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/95.0.4638.50 Mobile/15E148 Safari/604.1"
+          Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          Accept-Encoding: "gzip, deflate, br",
+          Accept-Language: "en-us",
+          Cache-Control: "max-age=0",
+          Connection: "keep-alive",
+          Cookie: kjwjqdhd.Cookie,
+          User-Agent: "Mozilla/5.0 (iPad; CPU OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/95.0.4638.50 Mobile/15E148 Safari/604.1",
         },
     }
     $.get(url, async (err, resp, data) => {
       try {
 
-        data = string(data)
+        data = String(data)
 
         if (resp.statusCode == 200) {
           console.log(`success!`);
