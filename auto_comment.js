@@ -12,9 +12,9 @@
 
 
 //只需要把 kjwjqd 批量替换成你想取的名字
-// 把  教程  改成软件名
+// 把  评论  改成软件名
 
-const $ = new Env('教程');
+const $ = new Env('评论');
 let status;
 
 status = (status = ($.getval("kjwjqdstatus") || "1")) > 1 ? `${status}` : "";
@@ -28,10 +28,9 @@ let kjwjqdurl = $.getdata('kjwjqdurl')
 let kjwjqdhd = $.getdata('kjwjqdhd')
 let kjwjqdbody = $.getdata('kjwjqdbody')
 
-let words=["评论拿分","感谢分享，学到了","我想升级","牛牛牛","很棒很棒!"];
-Authorization = kjwjqdhd.Authorization;
-idx = [];
-
+let words=["评论拿分","感谢分享，学到了","我想升级","牛牛牛","很棒很棒!"]
+let Authorization = kjwjqdhd.Authorization
+let idx = []
 
   !(async () => {
     if (typeof $request !== "undefined") {
@@ -69,9 +68,7 @@ idx = [];
           kjwjqdbody = kjwjqdbodyArr[i];
 
           $.index = i + 1;
-          console.log(`\n\n开始【教程${$.index}】`)
-
-
+          console.log(`\n\n开始【评论${$.index}】`)
           //循环运行
           for (let c = 0; c < 1; c++) {
             $.index = c + 1
@@ -104,8 +101,7 @@ function kjwjqdck() {
     if (kjwjqdbody) $.setdata(kjwjqdbody, `kjwjqdbody${status}`)
     $.log(kjwjqdbody)
 
-    $.msg($.name, "", `教程${status}获取headers成功`)
-
+    $.msg($.name, "", `评论${status}获取headers成功`)
   }
 }
 
@@ -132,22 +128,17 @@ function getindex(timeout = 0) {
 
         data = string(data);
 
-
         if (data.indexOf(`id="item`)>-1) {
           console.log(`index html 请求成功`);
           pat = /id="item-(.*?)">/g;
           idxs = data.match(pat);
           for(let i=0, i<20, i++){
-            idx[i] = idxs[i].slice(9,13);
-            console.log(idx[i]);
+            idx[i] = idxs[i].slice(9,13)
+            console.log(idx[i])
           }
-
-
         } else {
-          console.log(`index html 请求失败`);
-          console.log(data);
-
-
+          console.log(`index html 请求失败`)
+          console.log(data)
         }
       } catch (e) {
 
@@ -160,58 +151,10 @@ function getindex(timeout = 0) {
 }
 
 
-//版块
-function auto_comment(word,index,timeout = 0) {
-  return new Promise((resolve) => {
-    let word;
-    let index;
-    let headers = {
-      Accept : "application/json, text/plain, */*",
-      Authorization:Authorization,
-      Content-Type:"application/x-www-form-urlencoded",
-      Referer:`https://www.kejiwanjia.com/jiaocheng/${index}.html`,
-      sec-ch-ua:`" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"`,
-      sec-ch-ua-mobile:`?0`,
-      sec-ch-ua-platform:"Windows",
-      User-Agent:`Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36`,
-    }
 
 
-    let url = {
-      url: `https://www.kejiwanjia.com/wp-json/b2/v1/commentSubmit`,
-      headers: JSON.parse(kjwjqdhd),
-      body: {
-        comment_post_ID: index,
-        author: "蒿兹苯主意洋矛",
-        comment: word,
-        comment_parent: "0" ,
-        `img[imgUrl]`: "",
-        `img[imgId]`: "",
-      },
-    }
-    $.post(url, async (err, resp, data) => {
-      try {
-
-        data = JSON.parse(data)
-
-        if (resp.statusCode == 200) {
-          console.log(word + `评论成功!`);
-          console.log("评论index:" + index);
-        } else {
-          console.log(index + "评论失败");
-          console.log(resp);
 
 
-        }
-      } catch (e) {
-
-      } finally {
-
-        resolve()
-      }
-    }, timeout)
-  })
-}
 
 
 
