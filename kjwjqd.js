@@ -124,7 +124,7 @@ function kjwjqd(timeout = 0) {
     let url = {
       url: `https://www.kejiwanjia.com/wp-json/b2/v1/userMission`,
       headers: JSON.parse(kjwjqdhd),
-//      body: kjwjqdbody,
+      body: kjwjqdbody,
     }
     $.post(url, async (err, resp, data) => {
       try {
@@ -133,6 +133,7 @@ function kjwjqd(timeout = 0) {
 
         if (data.cerdit > 0) {
           console.log(`科技玩家签到成功！`);
+          console.log(data);
           console.log(`签到获取积分：${data.credit}`);
           console.log(`当前积分:${data.mission.my_credit}`);
 
