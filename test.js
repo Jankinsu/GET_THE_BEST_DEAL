@@ -106,18 +106,19 @@ function kjwjqdck() {
 //版块
 function getindex(timeout = 0) {
   return new Promise((resolve) => {
+    let headers = {
+        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        Accept-Encoding: "gzip, deflate, br",
+        Accept-Language: "en-us",
+        Cache-Control: "max-age=0",
+        Connection: "keep-alive",
+        Cookie: kjwjqdhd.Cookie,
+        User-Agent: "Mozilla/5.0 (iPad; CPU OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/95.0.4638.50 Mobile/15E148 Safari/604.1",
+      }
 
     let url = {
       url: `https://www.kejiwanjia.com/jiaocheng`,
-      let headers = {
-          Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-          Accept-Encoding: "gzip, deflate, br",
-          Accept-Language: "en-us",
-          Cache-Control: "max-age=0",
-          Connection: "keep-alive",
-          Cookie: kjwjqdhd.Cookie,
-          User-Agent: "Mozilla/5.0 (iPad; CPU OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/95.0.4638.50 Mobile/15E148 Safari/604.1",
-        },
+      headers:headers,
     }
     $.get(url, async (err, resp, data) => {
       try {
