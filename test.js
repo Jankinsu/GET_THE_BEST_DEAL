@@ -1,35 +1,35 @@
 /*
-11.19
-17 8 * * * https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/kjwjqd.js, tag=科技玩家签到, img-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/kjwj.png, enabled=true
+9.15
 
+软件：  羊毛
+收益：  每天200W
 注意事项 ： 运行js时不要打开软件app
 
-获取ck：  登录网站即可
+获取ck：  打开软件即可------
 
 重写：-------
 
-主机名：www.kejiwanjia.com
+主机名：-------
 
 */
 
 
 
 //只需要把 kjwjqd 批量替换成你想取的名字
-// 把  科技玩家签到  改成软件名
+// 把  教程  改成软件名
 
-const $ = new Env('科技玩家签到');
+const $ = new Env('教程');
 let status;
 
 status = (status = ($.getval("kjwjqdstatus") || "1")) > 1 ? `${status}` : "";
 
 const kjwjqdurlArr = [],
   kjwjqdhdArr = [],
-  kjwjqdbodyArr = [],
   kjwjqdcount = ''
 
 let kjwjqdurl = $.getdata('kjwjqdurl')
 let kjwjqdhd = $.getdata('kjwjqdhd')
-let kjwjqdbody = $.getdata('kjwjqdbody')
+
 
 
 
@@ -41,7 +41,7 @@ let kjwjqdbody = $.getdata('kjwjqdbody')
     } else {
       kjwjqdurlArr.push($.getdata('kjwjqdurl'))
       kjwjqdhdArr.push($.getdata('kjwjqdhd'))
-      kjwjqdbodyArr.push($.getdata('kjwjqdbody'))
+
 
       let kjwjqdcount = ($.getval('kjwjqdcount') || '1');
 
@@ -49,7 +49,7 @@ let kjwjqdbody = $.getdata('kjwjqdbody')
 
         kjwjqdurlArr.push($.getdata(`kjwjqdurl${i}`))
         kjwjqdhdArr.push($.getdata(`kjwjqdhd${i}`))
-        kjwjqdbodyArr.push($.getdata(`kjwjqdbody${i}`))
+
 
       }
 
@@ -66,17 +66,15 @@ let kjwjqdbody = $.getdata('kjwjqdbody')
 
           kjwjqdurl = kjwjqdurlArr[i];
           kjwjqdhd = kjwjqdhdArr[i];
-          kjwjqdbody = kjwjqdbodyArr[i];
+
 
           $.index = i + 1;
-          console.log(`\n\n开始【科技玩家签到${$.index}】`)
-
+          console.log(`\n\n开始【教程${$.index}】`)
 
           //循环运行
           for (let c = 0; c < 1; c++) {
             $.index = c + 1
-
-            await kjwjqd() //你要执行的版块
+            await getindex() //你要执行的版块
             await $.wait(1000) //你要延迟的时间  1000=1秒
 
           }
@@ -89,9 +87,9 @@ let kjwjqdbody = $.getdata('kjwjqdbody')
   .finally(() => $.done())
 
 
-//使用ddxpsum 的ck
+//获取ck
 function kjwjqdck() {
-  if ($request.url.indexOf("getUserInfo") > -1) {
+  if ($request.url.indexOf("不用管") > -1) {
     const kjwjqdurl = $request.url
     if (kjwjqdurl) $.setdata(kjwjqdurl, `kjwjqdurl${status}`)
     $.log(kjwjqdurl)
@@ -100,11 +98,7 @@ function kjwjqdck() {
     if (kjwjqdhd) $.setdata(kjwjqdhd, `kjwjqdhd${status}`)
     $.log(kjwjqdhd)
 
-    const kjwjqdbody = $request.body
-    if (kjwjqdbody) $.setdata(kjwjqdbody, `kjwjqdbody${status}`)
-    $.log(kjwjqdbody)
-
-    $.msg($.name, "", `科技玩家签到${status}获取headers成功`)
+    $.msg($.name, "", `教程${status}获取headers成功`)
 
   }
 }
@@ -112,32 +106,35 @@ function kjwjqdck() {
 
 
 
-
-
-
-
 //版块
-function kjwjqd(timeout = 0) {
+function getindex(timeout = 0) {
   return new Promise((resolve) => {
 
-
     let url = {
-      url: `https://www.kejiwanjia.com/wp-json/b2/v1/userMission`,
-      headers: JSON.parse(kjwjqdhd),
-      body: kjwjqdbody,
+      url: `https://www.kejiwanjia.com/kjwjqd`,
+      let headers = {
+          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          "Accept-Encoding": "gzip, deflate, br",
+          "Accept-Language": "en-us",
+          "Cache-Control": "max-age=0",
+          "Connection": "keep-alive",
+          "Cookie": kjwjqdhd.Cookie,
+          "User-Agent": "Mozilla/5.0 (iPad; CPU OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/95.0.4638.50 Mobile/15E148 Safari/604.1"
+        },
     }
-    $.post(url, async (err, resp, data) => {
+    $.get(url, async (err, resp, data) => {
       try {
 
-        data = String(data)
+        data = string(data)
 
         if (resp.statusCode == 200) {
-          console.log(`科技玩家签到成功！`);
-          console.log(data)
+          console.log(`success!`);
+//          console.log(data)
+
 
         } else {
-          console.log(`科技玩家签到失败！`);
-          console.log(data);
+          console.log(`failure!`)
+//          console.log(data)
 
 
         }
