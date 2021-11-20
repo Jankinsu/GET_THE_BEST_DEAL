@@ -123,7 +123,7 @@ function getindex(timeout = 0) {
     $.get(url, async (err, resp, data) => {
       try {
 
-        data = String(data)
+//        data = String(data)
 
         if (resp.statusCode == 200) {
           console.log(`success!`);
