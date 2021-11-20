@@ -111,7 +111,7 @@ function getindex(timeout = 0) {
   return new Promise((resolve) => {
 
     let url = {
-      url: `https://www.kejiwanjia.com/kjwjqd`,
+      url: `https://www.kejiwanjia.com/jiaocheng`,
       let headers = {
           "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
           "Accept-Encoding": "gzip, deflate, br",
