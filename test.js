@@ -31,6 +31,8 @@ let kjwjqdurl = $.getdata('kjwjqdurl')
 let kjwjqdhd = $.getdata('kjwjqdhd')
 let nums = []
 let words=["评论拿分","感谢分享，学到了","我想升级","牛牛牛","很棒很棒!"]
+let word
+let num
 
 
 
@@ -79,7 +81,7 @@ let words=["评论拿分","感谢分享，学到了","我想升级","牛牛牛",
             num = nums[Math.round(20 * Math.random())];
             console.log(word + num);
             $.index = c + 1
-            await auto_comment(word,num)
+            await auto_comment()
             await $.wait(3000) //你要延迟的时间  1000=1秒
           }
         }
@@ -165,7 +167,7 @@ function getindex(timeout = 0) {
 }
 
 // 评论函数
-function auto_comment(word,num,timeout = 0) {
+function auto_comment(timeout = 0) {
   return new Promise((resolve) => {
     let headers = {
       "Accept": "application/json, text/plain, */*",
@@ -201,10 +203,9 @@ function auto_comment(word,num,timeout = 0) {
 //        data = JSON.parse(data)
 
         if (resp.statusCode == 200) {
-          console.log(word + `评论成功!`);
-          console.log("评论index:" + index);
+          console.log(word + `=>评论成功!`);
         } else {
-          console.log(index + "评论失败");
+          console.log(word + "=>评论失败");
           console.log(resp);
 
 
