@@ -182,6 +182,8 @@ function auto_comment(timeout = 0) {
       "Referer": `https://www.kejiwanjia.com/jiaocheng/${num}.html`,
       "User-Agent": "Mozilla/5.0 (iPad; CPU OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/95.0.4638.50 Mobile/15E148 Safari/604.1"
     }
+    let body = `comment_post_ID=${num}&author=蒿兹苯主意洋矛&comment=${word}&comment_parent=0&img[imgUrl]=&img[imgId]=`;
+    /*
     let body = {
         comment_post_ID: num,
         author: "蒿兹苯主意洋矛",
@@ -191,7 +193,7 @@ function auto_comment(timeout = 0) {
         "img[imgId]": "",
     }
 
-
+*/
     let url = {
       url: `https://www.kejiwanjia.com/wp-json/b2/v1/commentSubmit`,
       headers:headers,
