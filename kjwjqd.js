@@ -129,7 +129,7 @@ function kjwjqd(timeout = 0) {
     $.post(url, async (err, resp, data) => {
       try {
 
-        data = String(data)
+        data = JSON.parse(data);
 
         if (resp.statusCode == 200) {
           console.log(`科技玩家签到成功！`);

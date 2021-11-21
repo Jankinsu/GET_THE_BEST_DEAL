@@ -117,8 +117,6 @@ function getindex(timeout = 0) {
   return new Promise((resolve) => {
     let idx
     let pat = /id="item-(.*?)">/g
-
-
     let headers = {
       "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
       "Accept-Encoding": "gzip, deflate, br",
@@ -182,18 +180,8 @@ function auto_comment(timeout = 0) {
       "Referer": `https://www.kejiwanjia.com/jiaocheng/${num}.html`,
       "User-Agent": "Mozilla/5.0 (iPad; CPU OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/95.0.4638.50 Mobile/15E148 Safari/604.1"
     }
-    let body = `comment_post_ID=${num}&author=蒿兹苯主意洋矛&comment=${word}&comment_parent=0&img[imgUrl]=&img[imgId]=`;
-    /*
-    let body = {
-        comment_post_ID: num,
-        author: "蒿兹苯主意洋矛",
-        comment: word,
-        comment_parent: "0" ,
-        "img[imgUrl]": "",
-        "img[imgId]": "",
-    }
+    let body = `comment_post_ID=${num}&author="蒿兹苯主意洋矛",&comment=${word},&comment_parent="0" ,&"img[imgUrl]"="",&"img[imgId]"="",`
 
-*/
     let url = {
       url: `https://www.kejiwanjia.com/wp-json/b2/v1/commentSubmit`,
       headers:headers,
