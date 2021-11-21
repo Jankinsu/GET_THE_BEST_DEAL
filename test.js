@@ -77,7 +77,7 @@ let words=["评论拿分","感谢分享，学到了","我想升级","牛牛牛",
           for (let c = 0; c < 5; c++) {
             word = words[c];
             num = nums[Math.round(20 * Math.random())];
-            console(word + num);
+            console.log(word + num);
             $.index = c + 1
             await auto_comment(word,num)
             await $.wait(3000) //你要延迟的时间  1000=1秒
