@@ -18,7 +18,7 @@
 //只需要把 kjwjqd 批量替换成你想取的名字
 // 把  教程  改成软件名
 
-const $ = new Env('教程');
+const $ = new Env('科技玩家评论');
 let status;
 
 status = (status = ($.getval("kjwjqdstatus") || "1")) > 1 ? `${status}` : "";
@@ -73,7 +73,7 @@ let num
           $.index = i + 1;
 //          console.log("检查kjwjqdhd的类别:"+typeof(kjwjqdhd))
           kjwjqdhd = JSON.parse(kjwjqdhd);
-          console.log(`\n\n开始【教程${$.index}】`)
+          console.log(`\n\n开始【科技玩家自动评论${$.index}】`)
 //          console.log("检查下header：")
 //          console.log(kjwjqdhd["Authorization"])
           await getindex()
