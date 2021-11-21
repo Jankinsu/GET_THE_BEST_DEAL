@@ -206,7 +206,7 @@ function auto_comment(timeout = 0) {
           console.log(word + `=>评论成功!`);
         } else {
           console.log(word + "=>评论失败");
-          console.log(resp);
+          console.log(data);
 
 
         }
