@@ -71,10 +71,10 @@ let num
 
 
           $.index = i + 1;
+          kjwjqdhd = JSON.parse(kjwjqdhd);
           console.log(`\n\n开始【教程${$.index}】`)
           console.log("检查下header：")
           console.log(kjwjqdhd["Authorization"])
-          console.log(kjwjqdhd["Cookie"])
           await getindex()
           await $.wait(3000);
 
@@ -84,7 +84,7 @@ let num
             num = nums[Math.round(20 * Math.random())];
             console.log(word + num);
             $.index = c + 1
-            await auto_comment()
+//            await auto_comment()
             await $.wait(3000) //你要延迟的时间  1000=1秒
           }
         }
@@ -129,6 +129,8 @@ function getindex(timeout = 0) {
       "Cookie": kjwjqdhd.Cookie,
       "User-Agent": "Mozilla/5.0 (iPad; CPU OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/95.0.4638.50 Mobile/15E148 Safari/604.1",
     }
+    console.log("检查get_index header.Auth")
+    console.log(headers.Authorization);
     let url = {
       url: `https://www.kejiwanjia.com/jiaocheng`,
       headers: headers,
