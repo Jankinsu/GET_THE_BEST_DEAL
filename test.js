@@ -132,7 +132,12 @@ function getindex(timeout = 0) {
         if (resp.statusCode == 200) {
           console.log(`success!`)
           idx = data.match(pat);
+          console.log(typeof(idx));
           console.log(idx);
+          for(let i=0; i<idx.length; i++){
+            nums[i] = idx[i].slice(9,14);
+          }
+          console.log(nums);
           //          console.log(data)
 
 
