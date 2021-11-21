@@ -30,6 +30,8 @@ const kjwjqdurlArr = [],
 let kjwjqdurl = $.getdata('kjwjqdurl')
 let kjwjqdhd = $.getdata('kjwjqdhd')
 let nums = []
+let words=["评论拿分","感谢分享，学到了","我想升级","牛牛牛","很棒很棒!"]
+
 
 
   !(async () => {
@@ -68,13 +70,16 @@ let nums = []
 
           $.index = i + 1;
           console.log(`\n\n开始【教程${$.index}】`)
+          await getindex()
+          await $.wait(3000);
 
           //循环运行
-          for (let c = 0; c < 1; c++) {
+          for (let c = 0; c < 5; c++) {
+            word = words[c];
+            num = nums[Math.round(20 * Math.random())];
             $.index = c + 1
-            await getindex() //你要执行的版块
-            await $.wait(1000) //你要延迟的时间  1000=1秒
-
+            await auto_comment(word,num)
+            await $.wait(3000) //你要延迟的时间  1000=1秒
           }
         }
       }
@@ -104,7 +109,7 @@ function kjwjqdck() {
 
 
 
-//版块
+//获取文章编号列表
 function getindex(timeout = 0) {
   return new Promise((resolve) => {
     let idx
@@ -132,11 +137,12 @@ function getindex(timeout = 0) {
         if (resp.statusCode == 200) {
           console.log(`success!`)
           idx = data.match(pat);
-          console.log(typeof(idx));
-          console.log(idx);
+//          console.log(typeof(idx));
+//          console.log(idx);
           for(let i=0; i<idx.length; i++){
             nums[i] = idx[i].slice(9,14);
           }
+          console.log(`文章编号获取成功`)
           console.log(nums);
           //          console.log(data)
 
@@ -156,6 +162,59 @@ function getindex(timeout = 0) {
     }, timeout)
   })
 }
+
+// 评论函数
+function auto_comment(word,num,timeout = 0) {
+  return new Promise((resolve) => {
+    let headers = {
+      "Accept": `application/json, text/plain, */*`,
+      "Authorization": kjwjqdhd.Authorization,
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Referer": `https://www.kejiwanjia.com/jiaocheng/${num}.html`,
+      "sec-ch-ua": `" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"`,
+      "sec-ch-ua-mobile": `?0`,
+      "sec-ch-ua-platform": "Windows",
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36",
+    };
+    let body = {
+        comment_post_ID: num,
+        author: "蒿兹苯主意洋矛",
+        comment: word,
+        comment_parent: "0" ,
+        "img[imgUrl]": "",
+        "img[imgId]": "",
+    };
+
+
+    let url = {
+      url: `https://www.kejiwanjia.com/wp-json/b2/v1/commentSubmit`,
+      headers:headers,
+      body: body,
+    }
+    $.post(url, async (err, resp, data) => {
+      try {
+
+//        data = JSON.parse(data)
+
+        if (resp.statusCode == 200) {
+          console.log(word + `评论成功!`);
+          console.log("评论index:" + index);
+        } else {
+          console.log(index + "评论失败");
+          console.log(resp);
+
+
+        }
+      } catch (e) {
+
+      } finally {
+
+        resolve()
+      }
+    }, timeout)
+  })
+}
+
 
 
 
