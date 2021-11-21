@@ -71,11 +71,11 @@ let num
 
 
           $.index = i + 1;
-          console.log("检查kjwjqdhd的类别:"+typeof(kjwjqdhd))
+//          console.log("检查kjwjqdhd的类别:"+typeof(kjwjqdhd))
           kjwjqdhd = JSON.parse(kjwjqdhd);
           console.log(`\n\n开始【教程${$.index}】`)
-          console.log("检查下header：")
-          console.log(kjwjqdhd["Authorization"])
+//          console.log("检查下header：")
+//          console.log(kjwjqdhd["Authorization"])
           await getindex()
           await $.wait(3000);
 
@@ -85,7 +85,7 @@ let num
             num = nums[Math.round(20 * Math.random())];
             console.log(word + num);
             $.index = c + 1
-//            await auto_comment()
+            await auto_comment()
             await $.wait(3000) //你要延迟的时间  1000=1秒
           }
         }
