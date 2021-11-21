@@ -1,36 +1,40 @@
 /*
-11.20
+[task local]
+17 8 * * * https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/auto_comment.js, tag=科技玩家签到, img-url=https://raw.githubusercontent.com/Jankinsu/GET_THE_BEST_DEAL/main/image/kjwj.png, enabled=true
 
-获取ck：  登录kjwj网站获取
+11.21
+注意事项 ： 运行js时不要打开网站
 
-重写：-------
+获取ck：  登录科技玩家即可------
 
-主机名：www.kejiwanjia.com
+重写：-------使用kjwjqd的重写即可
+
+主机名：----www.kejiwanjia.com
 
 */
 
 
 
 //只需要把 kjwjqd 批量替换成你想取的名字
-// 把  评论  改成软件名
+// 把  教程  改成软件名
 
-const $ = new Env('评论');
+const $ = new Env('科技玩家评论');
 let status;
 
 status = (status = ($.getval("kjwjqdstatus") || "1")) > 1 ? `${status}` : "";
 
 const kjwjqdurlArr = [],
   kjwjqdhdArr = [],
-  kjwjqdbodyArr = [],
   kjwjqdcount = ''
 
 let kjwjqdurl = $.getdata('kjwjqdurl')
 let kjwjqdhd = $.getdata('kjwjqdhd')
-let kjwjqdbody = $.getdata('kjwjqdbody')
+let nums = []
+let words=["感谢大佬","感谢分享，学到了","谢谢啊~","牛牛牛","很棒很棒!"]
+let word
+let num
 
-let words=["评论拿分","感谢分享，学到了","我想升级","牛牛牛","很棒很棒!"]
-let Authorization = kjwjqdhd.Authorization
-let idx = []
+
 
   !(async () => {
     if (typeof $request !== "undefined") {
@@ -40,7 +44,7 @@ let idx = []
     } else {
       kjwjqdurlArr.push($.getdata('kjwjqdurl'))
       kjwjqdhdArr.push($.getdata('kjwjqdhd'))
-      kjwjqdbodyArr.push($.getdata('kjwjqdbody'))
+
 
       let kjwjqdcount = ($.getval('kjwjqdcount') || '1');
 
@@ -48,7 +52,6 @@ let idx = []
 
         kjwjqdurlArr.push($.getdata(`kjwjqdurl${i}`))
         kjwjqdhdArr.push($.getdata(`kjwjqdhd${i}`))
-        kjwjqdbodyArr.push($.getdata(`kjwjqdbody${i}`))
 
       }
 
@@ -65,17 +68,25 @@ let idx = []
 
           kjwjqdurl = kjwjqdurlArr[i];
           kjwjqdhd = kjwjqdhdArr[i];
-          kjwjqdbody = kjwjqdbodyArr[i];
+
 
           $.index = i + 1;
-          console.log(`\n\n开始【评论${$.index}】`)
+//          console.log("检查kjwjqdhd的类别:"+typeof(kjwjqdhd))
+          kjwjqdhd = JSON.parse(kjwjqdhd);
+          console.log(`\n\n开始【科技玩家自动评论${$.index}】`)
+//          console.log("检查下header：")
+//          console.log(kjwjqdhd["Authorization"])
+          await getindex()
+          await $.wait(3000);
+
           //循环运行
-          for (let c = 0; c < 1; c++) {
+          for (let c = 0; c < 5; c++) {
+            word = words[c];
+            num = nums[Math.round(20 * Math.random())];
+            console.log(word + num);
             $.index = c + 1
-
-            await getindex() //你要执行的版块
-            await $.wait(1000) //你要延迟的时间  1000=1秒
-
+            await auto_comment()
+            await $.wait(30000) //你要延迟的时间  1000=1秒
           }
         }
       }
@@ -86,7 +97,7 @@ let idx = []
   .finally(() => $.done())
 
 
-//使用ddxpsum 的ck
+//获取ck
 function kjwjqdck() {
   if ($request.url.indexOf("不用管") > -1) {
     const kjwjqdurl = $request.url
@@ -97,17 +108,19 @@ function kjwjqdck() {
     if (kjwjqdhd) $.setdata(kjwjqdhd, `kjwjqdhd${status}`)
     $.log(kjwjqdhd)
 
-    const kjwjqdbody = $request.body
-    if (kjwjqdbody) $.setdata(kjwjqdbody, `kjwjqdbody${status}`)
-    $.log(kjwjqdbody)
+    $.msg($.name, "", `教程${status}获取headers成功`)
 
-    $.msg($.name, "", `评论${status}获取headers成功`)
   }
 }
 
-//获取index
+
+
+
+//获取文章编号列表
 function getindex(timeout = 0) {
   return new Promise((resolve) => {
+    let idx
+    let pat = /id="item-(.*?)">/g
     let headers = {
       "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
       "Accept-Encoding": "gzip, deflate, br",
@@ -115,30 +128,37 @@ function getindex(timeout = 0) {
       "Cache-Control": "max-age=0",
       "Connection": "keep-alive",
       "Cookie": kjwjqdhd.Cookie,
-      "User-Agent": "Mozilla/5.0 (iPad; CPU OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/95.0.4638.50 Mobile/15E148 Safari/604.1"
-    };
-
+      "User-Agent": "Mozilla/5.0 (iPad; CPU OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/95.0.4638.50 Mobile/15E148 Safari/604.1",
+    }
+//    console.log("检查get_index header.Auth")
+//    console.log(headers.Authorization);
     let url = {
       url: `https://www.kejiwanjia.com/jiaocheng`,
       headers: headers,
     }
-
     $.get(url, async (err, resp, data) => {
       try {
 
-        data = string(data);
+        //        data = String(data)
 
-        if (data.indexOf(`id="item`)>-1) {
-          console.log(`index html 请求成功`);
-          pat = /id="item-(.*?)">/g;
-          idxs = data.match(pat);
-          for(let i=0, i<20, i++){
-            idx[i] = idxs[i].slice(9,13)
-            console.log(idx[i])
+        if (resp.statusCode == 200) {
+          console.log(`success!`)
+          idx = data.match(pat);
+//          console.log(typeof(idx));
+//          console.log(idx);
+          for(let i=0; i<idx.length; i++){
+            nums[i] = idx[i].slice(9,14);
           }
+          console.log(`文章编号获取成功`)
+          console.log(nums);
+          //          console.log(data)
+
+
         } else {
-          console.log(`index html 请求失败`)
-          console.log(data)
+          console.log(`failure!`)
+          //          console.log(data)
+
+
         }
       } catch (e) {
 
@@ -150,10 +170,55 @@ function getindex(timeout = 0) {
   })
 }
 
+// 评论函数
+function auto_comment(timeout = 0) {
+  return new Promise((resolve) => {
+//    console.log("检查下header：")
+//    console.log(kjwjqdhd.Authorization);
+//    console.log(kjwjqdhd.Cookie);
+    let headers = {
+      "Accept": "application/json, text/plain, */*",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Accept-Language": "en-us",
+      "Authorization": kjwjqdhd.Authorization,
+      "Connection": "keep-alive",
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cookie":kjwjqdhd.Cookie,
+      "Host": "www.kejiwanjia.com",
+      "Origin": "https://www.kejiwanjia.com",
+      "Referer": `https://www.kejiwanjia.com/jiaocheng/${num}.html`,
+      "User-Agent": "Mozilla/5.0 (iPad; CPU OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/95.0.4638.50 Mobile/15E148 Safari/604.1"
+    }
+    let body = `comment_post_ID=${num}&author="蒿兹苯主意洋矛",&comment=${word},&comment_parent="0" ,&"img[imgUrl]"="",&"img[imgId]"="",`
+
+    let url = {
+      url: `https://www.kejiwanjia.com/wp-json/b2/v1/commentSubmit`,
+      headers:headers,
+      body: body,
+    }
+    $.post(url, async (err, resp, data) => {
+      try {
+
+//        data = JSON.parse(data)
+
+        if (resp.statusCode == 200) {
+          console.log(word + `=>评论成功!`);
+        } else {
+          console.log(resp.statusCode);
+          console.log(word + "=>评论失败");
+          console.log(data);
 
 
+        }
+      } catch (e) {
 
+      } finally {
 
+        resolve()
+      }
+    }, timeout)
+  })
+}
 
 
 
