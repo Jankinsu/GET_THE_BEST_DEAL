@@ -71,6 +71,7 @@ let num
 
 
           $.index = i + 1;
+          console.log("检查kjwjqdhd的类别:"+typeof(kjwjqdhd))
           kjwjqdhd = JSON.parse(kjwjqdhd);
           console.log(`\n\n开始【教程${$.index}】`)
           console.log("检查下header：")
