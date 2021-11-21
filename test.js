@@ -73,7 +73,8 @@ let num
           $.index = i + 1;
           console.log(`\n\n开始【教程${$.index}】`)
           console.log("检查下header：")
-          console.log(kjwjqdhd)
+          console.log(kjwjqdhd.Authorization)
+          console.log(kjwjqdhd.Cookie)
           await getindex()
           await $.wait(3000);
 
