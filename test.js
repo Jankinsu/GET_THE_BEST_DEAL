@@ -167,6 +167,9 @@ function getindex(timeout = 0) {
 // 评论函数
 function auto_comment(timeout = 0) {
   return new Promise((resolve) => {
+    console.log("检查下header：")
+    console.log(kjwjqdhd.Authorization);
+    console.log(kjwjqdhd.Cookie);
     let headers = {
       "Accept": "application/json, text/plain, */*",
       "Accept-Encoding": "gzip, deflate, br",
