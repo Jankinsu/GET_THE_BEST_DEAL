@@ -29,6 +29,7 @@ const kjwjqdurlArr = [],
 
 let kjwjqdurl = $.getdata('kjwjqdurl')
 let kjwjqdhd = $.getdata('kjwjqdhd')
+let nums = []
 
 
   !(async () => {
@@ -106,6 +107,10 @@ function kjwjqdck() {
 //版块
 function getindex(timeout = 0) {
   return new Promise((resolve) => {
+    let idx
+    let pat = /id="item-(.*?)">/g
+
+
     let headers = {
       "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
       "Accept-Encoding": "gzip, deflate, br",
@@ -126,6 +131,8 @@ function getindex(timeout = 0) {
 
         if (resp.statusCode == 200) {
           console.log(`success!`)
+          idx = data.match(pat);
+          console.log(idx);
           //          console.log(data)
 
 
