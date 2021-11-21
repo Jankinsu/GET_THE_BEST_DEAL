@@ -205,6 +205,7 @@ function auto_comment(timeout = 0) {
         if (resp.statusCode == 200) {
           console.log(word + `=>评论成功!`);
         } else {
+          console.log(resp.statusCode);
           console.log(word + "=>评论失败");
           console.log(data);
 
