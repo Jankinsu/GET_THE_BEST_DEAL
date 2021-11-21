@@ -77,6 +77,7 @@ let words=["评论拿分","感谢分享，学到了","我想升级","牛牛牛",
           for (let c = 0; c < 5; c++) {
             word = words[c];
             num = nums[Math.round(20 * Math.random())];
+            console(word + num);
             $.index = c + 1
             await auto_comment(word,num)
             await $.wait(3000) //你要延迟的时间  1000=1秒
@@ -167,15 +168,18 @@ function getindex(timeout = 0) {
 function auto_comment(word,num,timeout = 0) {
   return new Promise((resolve) => {
     let headers = {
-      "Accept": `application/json, text/plain, */*`,
+      "Accept": "application/json, text/plain, */*",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Accept-Language": "en-us",
       "Authorization": kjwjqdhd.Authorization,
+      "Connection": "keep-alive",
       "Content-Type": "application/x-www-form-urlencoded",
+      "Cookie":kjwjqdhd.Cookie,
+      "Host": "www.kejiwanjia.com",
+      "Origin": "https://www.kejiwanjia.com",
       "Referer": `https://www.kejiwanjia.com/jiaocheng/${num}.html`,
-      "sec-ch-ua": `" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"`,
-      "sec-ch-ua-mobile": `?0`,
-      "sec-ch-ua-platform": "Windows",
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36",
-    };
+      "User-Agent": "Mozilla/5.0 (iPad; CPU OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/95.0.4638.50 Mobile/15E148 Safari/604.1"
+    }
     let body = {
         comment_post_ID: num,
         author: "蒿兹苯主意洋矛",
@@ -183,7 +187,7 @@ function auto_comment(word,num,timeout = 0) {
         comment_parent: "0" ,
         "img[imgUrl]": "",
         "img[imgId]": "",
-    };
+    }
 
 
     let url = {
