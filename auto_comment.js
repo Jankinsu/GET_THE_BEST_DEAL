@@ -30,7 +30,7 @@ const kjwjqdurlArr = [],
 let kjwjqdurl = $.getdata('kjwjqdurl')
 let kjwjqdhd = $.getdata('kjwjqdhd')
 let nums = []
-let words=["感谢大佬","感谢分享，学到了","谢谢啊~","牛牛牛","很棒很棒!"]
+let words=["每天例行学习","我来学习了","学习学习","学会了学会了","感谢大佬","感谢分享，学到了","谢谢啊~","牛牛牛","很棒很棒!","膜拜大佬！","不错不错"]
 let word
 let num
 
@@ -81,7 +81,7 @@ let num
 
           //循环运行
           for (let c = 0; c < 5; c++) {
-            word = words[c];
+            word = words[Math.round(10 * Math.random())];
             num = nums[Math.round(20 * Math.random())];
             console.log(word + num);
             $.index = c + 1
