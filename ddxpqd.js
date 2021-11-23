@@ -90,6 +90,7 @@ let uuid_yt;
           // 翻牌
           await ddxpfp();
           await $.wait(1000 * (1 + Math.round(2 * Math.random())));
+          await $.wait(10000);
           // 翻牌领赏
 
           await ddxpfpls()
