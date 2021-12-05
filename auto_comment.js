@@ -80,7 +80,7 @@ let num
           await $.wait(3000);
 
           //循环运行
-          for (let c = 0; c < 5; c++) {
+          for (let c = 0; c < 4; c++) {
             word = words[Math.round(10 * Math.random())];
             num = nums[Math.round(20 * Math.random())];
             console.log(word + num);
